@@ -232,7 +232,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [authError, setAuthError] = useState("");
 
-  const [dailyFeeling, setDailyFeeling] = useState("");
+  const [, setDailyFeeling] = useState("");
   const [mealInput, setMealInput] = useState("");
   const [mealFeeling, setMealFeeling] = useState("");
   const [meals, setMeals] = useState([]);
