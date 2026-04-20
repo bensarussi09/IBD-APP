@@ -653,106 +653,201 @@ export default function App() {
     if (value === "טוב") return "#16a34a";
     if (value === "סביר") return "#d97706";
     if (value === "לא טוב") return "#dc2626";
-    if (value === "עוד לא סימנתי") return "#6b7280";
-    return "#6b7280";
+    if (value === "עוד לא סימנתי") return "#64748b";
+    return "#64748b";
+  };
+
+  const pageBackground = {
+    minHeight: "100vh",
+    background: "linear-gradient(180deg, #f5fffd 0%, #eef7ff 52%, #f8fafc 100%)",
+    fontFamily: "Arial, sans-serif",
+  };
+
+  const pageContainer = {
+    maxWidth: "460px",
+    margin: "0 auto",
+  };
+
+  const authWrapper = {
+    ...pageBackground,
+    padding: "24px 16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const appWrapper = {
+    ...pageBackground,
+    padding: "24px 16px 32px",
+  };
+
+  const authCard = {
+    background: "rgba(255,255,255,0.92)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    borderRadius: "28px",
+    padding: "26px",
+    boxShadow: "0 18px 42px rgba(15,23,42,0.08)",
+    border: "1px solid rgba(226,232,240,0.85)",
   };
 
   const feelingButtonStyle = (value, selectedValue) => ({
     padding: "12px 18px",
-    borderRadius: "12px",
+    borderRadius: "14px",
     border:
-      selectedValue === value ? "2px solid #10b981" : "1px solid #d1d5db",
-    backgroundColor: selectedValue === value ? "#ecfdf5" : "white",
-    color: "#111827",
-    fontSize: "16px",
+      selectedValue === value ? "2px solid #14b8a6" : "1px solid #dbe4ea",
+    background:
+      selectedValue === value
+        ? "linear-gradient(135deg, #ecfeff, #f0fdfa)"
+        : "#ffffff",
+    color: "#0f172a",
+    fontSize: "15px",
     cursor: "pointer",
-    minWidth: "90px",
-    fontWeight: "500",
+    minWidth: "92px",
+    fontWeight: "700",
+    transition: "all 0.2s ease",
+    boxShadow:
+      selectedValue === value
+        ? "0 10px 24px rgba(20,184,166,0.14)"
+        : "0 4px 12px rgba(15,23,42,0.05)",
   });
 
   const smallFeelingButtonStyle = (value, selectedValue) => ({
-    padding: "8px 10px",
-    borderRadius: "10px",
+    padding: "8px 12px",
+    borderRadius: "12px",
     border:
-      selectedValue === value ? "2px solid #10b981" : "1px solid #d1d5db",
-    backgroundColor: selectedValue === value ? "#ecfdf5" : "white",
-    color: "#111827",
+      selectedValue === value ? "2px solid #14b8a6" : "1px solid #dbe4ea",
+    background:
+      selectedValue === value
+        ? "linear-gradient(135deg, #ecfeff, #f0fdfa)"
+        : "#ffffff",
+    color: "#0f172a",
     fontSize: "13px",
     cursor: "pointer",
-    fontWeight: "500",
+    fontWeight: "700",
+    transition: "all 0.2s ease",
   });
 
   const mainButton = {
     padding: "14px 18px",
-    borderRadius: "14px",
+    borderRadius: "16px",
     border: "none",
-    backgroundColor: "#10b981",
+    background: "linear-gradient(135deg, #14b8a6, #10b981)",
     color: "white",
     fontSize: "16px",
-    fontWeight: "600",
+    fontWeight: "800",
     cursor: "pointer",
     width: "100%",
     marginTop: "16px",
+    boxShadow: "0 14px 28px rgba(16,185,129,0.22)",
+    transition: "all 0.2s ease",
   };
 
   const secondaryButton = {
     padding: "12px 18px",
-    borderRadius: "14px",
-    border: "1px solid #d1d5db",
-    backgroundColor: "white",
-    color: "#111827",
-    fontSize: "16px",
+    borderRadius: "16px",
+    border: "1px solid #dbe4ea",
+    backgroundColor: "rgba(255,255,255,0.92)",
+    color: "#0f172a",
+    fontSize: "15px",
+    fontWeight: "700",
     cursor: "pointer",
     width: "100%",
     marginTop: "12px",
+    boxShadow: "0 8px 20px rgba(15,23,42,0.05)",
   };
 
   const cardStyle = {
-    backgroundColor: "white",
-    borderRadius: "20px",
-    padding: "20px",
-    boxShadow: "0 6px 20px rgba(15,23,42,0.06)",
-    marginBottom: "16px",
+    background: "rgba(255,255,255,0.9)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    borderRadius: "24px",
+    padding: "22px",
+    boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
+    marginBottom: "18px",
+    border: "1px solid rgba(226,232,240,0.9)",
   };
 
   const inputStyle = {
     width: "100%",
-    padding: "14px",
-    borderRadius: "14px",
-    border: "1px solid #d1d5db",
+    padding: "15px 16px",
+    borderRadius: "16px",
+    border: "1px solid #dbe4ea",
     fontSize: "16px",
     boxSizing: "border-box",
     marginBottom: "12px",
     fontFamily: "Arial, sans-serif",
+    backgroundColor: "#fcfefe",
+    color: "#0f172a",
+    outline: "none",
+    boxShadow: "inset 0 1px 2px rgba(15,23,42,0.03)",
+  };
+
+  const chipAllowed = {
+    backgroundColor: "#ecfdf5",
+    color: "#166534",
+    padding: "8px 12px",
+    borderRadius: "999px",
+    fontSize: "14px",
+    border: "1px solid #bbf7d0",
+    fontWeight: "700",
+  };
+
+  const chipForbidden = {
+    backgroundColor: "#fef2f2",
+    color: "#991b1b",
+    padding: "8px 12px",
+    borderRadius: "999px",
+    fontSize: "14px",
+    border: "1px solid #fecaca",
+    fontWeight: "700",
   };
 
   if (screen === "auth") {
     return (
-      <div
-        dir="rtl"
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#f8fafc",
-          fontFamily: "Arial, sans-serif",
-          padding: "24px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div dir="rtl" style={authWrapper}>
         <div style={{ maxWidth: "460px", width: "100%" }}>
           {authMode === "login" ? (
-            <div
-              style={{
-                backgroundColor: "white",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 10px 30px rgba(15,23,42,0.08)",
-              }}
-            >
-              <h1 style={{ marginTop: 0, fontSize: "32px", color: "#111827" }}>
+            <div style={authCard}>
+              <div
+                style={{
+                  display: "inline-block",
+                  marginBottom: "14px",
+                  padding: "8px 14px",
+                  borderRadius: "999px",
+                  background: "#ecfeff",
+                  color: "#0f766e",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  border: "1px solid #bae6fd",
+                }}
+              >
+                IBD FOOD • התחברות מאובטחת
+              </div>
+
+              <h1
+                style={{
+                  marginTop: 0,
+                  marginBottom: "10px",
+                  fontSize: "34px",
+                  color: "#0f172a",
+                  lineHeight: "1.1",
+                }}
+              >
                 התחברות
               </h1>
+
+              <p
+                style={{
+                  marginTop: 0,
+                  marginBottom: "22px",
+                  color: "#64748b",
+                  fontSize: "15px",
+                  lineHeight: "1.6",
+                }}
+              >
+                היכנס לחשבון שלך וקבל המלצות תזונה יומיות בהתאם למצב שלך.
+              </p>
 
               <input
                 placeholder="שם משתמש"
@@ -780,8 +875,10 @@ export default function App() {
                     color: "#dc2626",
                     fontSize: "14px",
                     backgroundColor: "#fef2f2",
-                    padding: "10px",
-                    borderRadius: "12px",
+                    padding: "12px",
+                    borderRadius: "14px",
+                    border: "1px solid #fecaca",
+                    fontWeight: "600",
                   }}
                 >
                   {authError}
@@ -803,17 +900,47 @@ export default function App() {
               </button>
             </div>
           ) : (
-            <div
-              style={{
-                backgroundColor: "white",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 10px 30px rgba(15,23,42,0.08)",
-              }}
-            >
-              <h1 style={{ marginTop: 0, fontSize: "32px", color: "#111827" }}>
+            <div style={authCard}>
+              <div
+                style={{
+                  display: "inline-block",
+                  marginBottom: "14px",
+                  padding: "8px 14px",
+                  borderRadius: "999px",
+                  background: "#ecfeff",
+                  color: "#0f766e",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  border: "1px solid #bae6fd",
+                }}
+              >
+                IBD FOOD • יצירת חשבון
+              </div>
+
+              <h1
+                style={{
+                  marginTop: 0,
+                  marginBottom: "10px",
+                  fontSize: "34px",
+                  color: "#0f172a",
+                  lineHeight: "1.1",
+                }}
+              >
                 הרשמה
               </h1>
+
+              <p
+                style={{
+                  marginTop: 0,
+                  marginBottom: "22px",
+                  color: "#64748b",
+                  fontSize: "15px",
+                  lineHeight: "1.6",
+                }}
+              >
+                מלא כמה פרטים בסיסיים כדי שנוכל להתאים לך תפריט אישי ומתכונים
+                רלוונטיים יותר.
+              </p>
 
               <input
                 placeholder="שם מלא"
@@ -934,22 +1061,18 @@ export default function App() {
 
               {registerData.allowedFoods.length > 0 && (
                 <div style={{ marginBottom: "12px" }}>
-                  <div style={{ fontWeight: "700", marginBottom: "8px" }}>
+                  <div
+                    style={{
+                      fontWeight: "800",
+                      marginBottom: "8px",
+                      color: "#0f172a",
+                    }}
+                  >
                     מאכלים מותרים:
                   </div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                     {registerData.allowedFoods.map((food, index) => (
-                      <span
-                        key={index}
-                        style={{
-                          backgroundColor: "#ecfdf5",
-                          color: "#166534",
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          fontSize: "14px",
-                          border: "1px solid #bbf7d0",
-                        }}
-                      >
+                      <span key={index} style={chipAllowed}>
                         {food}
                       </span>
                     ))}
@@ -959,22 +1082,18 @@ export default function App() {
 
               {registerData.forbiddenFoods.length > 0 && (
                 <div style={{ marginBottom: "12px" }}>
-                  <div style={{ fontWeight: "700", marginBottom: "8px" }}>
+                  <div
+                    style={{
+                      fontWeight: "800",
+                      marginBottom: "8px",
+                      color: "#0f172a",
+                    }}
+                  >
                     מאכלים אסורים:
                   </div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                     {registerData.forbiddenFoods.map((food, index) => (
-                      <span
-                        key={index}
-                        style={{
-                          backgroundColor: "#fef2f2",
-                          color: "#991b1b",
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          fontSize: "14px",
-                          border: "1px solid #fecaca",
-                        }}
-                      >
+                      <span key={index} style={chipForbidden}>
                         {food}
                       </span>
                     ))}
@@ -989,8 +1108,10 @@ export default function App() {
                     color: "#dc2626",
                     fontSize: "14px",
                     backgroundColor: "#fef2f2",
-                    padding: "10px",
-                    borderRadius: "12px",
+                    padding: "12px",
+                    borderRadius: "14px",
+                    border: "1px solid #fecaca",
+                    fontWeight: "600",
                   }}
                 >
                   {authError}
@@ -1018,44 +1139,69 @@ export default function App() {
   }
 
   return (
-    <div
-      dir="rtl"
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#f8fafc",
-        fontFamily: "Arial, sans-serif",
-        padding: "24px 16px",
-      }}
-    >
-      <div style={{ maxWidth: "460px", margin: "0 auto" }}>
+    <div dir="rtl" style={appWrapper}>
+      <div style={pageContainer}>
         {screen === "home" && currentUser && (
           <>
             <div
               style={{
-                background: "linear-gradient(135deg, #10b981, #34d399)",
+                background: "linear-gradient(135deg, #0f766e, #14b8a6 52%, #34d399)",
                 color: "white",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 10px 30px rgba(16,185,129,0.18)",
-                marginBottom: "18px",
+                borderRadius: "28px",
+                padding: "26px",
+                boxShadow: "0 18px 45px rgba(20,184,166,0.24)",
+                marginBottom: "20px",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              <div
+                style={{
+                  display: "inline-block",
+                  marginBottom: "12px",
+                  padding: "7px 12px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.18)",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                }}
+              >
+                IBD FOOD • ליווי תזונתי יומי
+              </div>
+
               <div style={{ fontSize: "14px", opacity: 0.95, marginBottom: "8px" }}>
                 שלום {currentUser.fullName}
               </div>
-              <h1 style={{ margin: 0, fontSize: "32px", lineHeight: "1.2" }}>
+
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: "34px",
+                  lineHeight: "1.15",
+                  fontWeight: "800",
+                }}
+              >
                 מה בטוח לי לאכול היום?
               </h1>
-              <div style={{ marginTop: "12px", fontSize: "15px" }}>
+
+              <div style={{ marginTop: "14px", fontSize: "15px" }}>
                 מצב נוכחי: <strong>{currentUser.currentStatus}</strong>
               </div>
+
               <div style={{ marginTop: "6px", fontSize: "15px" }}>
                 מחלה: <strong>{currentUser.diseaseType}</strong>
               </div>
             </div>
 
             <div style={cardStyle}>
-              <h3 style={{ marginTop: 0, marginBottom: "14px", fontSize: "22px" }}>
+              <h3
+                style={{
+                  marginTop: 0,
+                  marginBottom: "14px",
+                  fontSize: "22px",
+                  color: "#0f172a",
+                }}
+              >
                 תפריט יומי AI
               </h3>
 
@@ -1065,17 +1211,18 @@ export default function App() {
                     <div
                       key={index}
                       style={{
-                        backgroundColor: "#f0fdf4",
+                        background: "linear-gradient(180deg, #f8fffd, #f0fdf4)",
                         border: "1px solid #bbf7d0",
-                        borderRadius: "16px",
-                        padding: "14px",
+                        borderRadius: "18px",
+                        padding: "16px",
+                        boxShadow: "0 8px 20px rgba(15,23,42,0.04)",
                       }}
                     >
                       <div
                         style={{
-                          fontSize: "15px",
-                          fontWeight: "700",
-                          color: "#166534",
+                          fontSize: "14px",
+                          fontWeight: "800",
+                          color: "#0f766e",
                           marginBottom: "6px",
                         }}
                       >
@@ -1084,16 +1231,23 @@ export default function App() {
 
                       <div
                         style={{
-                          fontSize: "18px",
-                          fontWeight: "700",
-                          color: "#111827",
+                          fontSize: "20px",
+                          fontWeight: "800",
+                          color: "#0f172a",
                           marginBottom: "8px",
                         }}
                       >
                         {item.recipe.name}
                       </div>
 
-                      <div style={{ fontSize: "14px", color: "#4b5563", marginBottom: "8px" }}>
+                      <div
+                        style={{
+                          fontSize: "14px",
+                          color: "#475569",
+                          marginBottom: "8px",
+                          lineHeight: "1.6",
+                        }}
+                      >
                         {item.recipe.description}
                       </div>
 
@@ -1101,24 +1255,29 @@ export default function App() {
                         style={{
                           fontSize: "14px",
                           color: "#166534",
-                          fontWeight: "600",
-                          marginBottom: "10px",
+                          fontWeight: "700",
+                          marginBottom: "12px",
+                          lineHeight: "1.6",
                         }}
                       >
-                        רכיבים: {(item.recipe.fullIngredients || item.recipe.ingredients).join(", ")}
+                        רכיבים:{" "}
+                        {(item.recipe.fullIngredients || item.recipe.ingredients).join(
+                          ", "
+                        )}
                       </div>
 
                       <button
                         onClick={() => addSuggestedMealToToday(item.recipe)}
                         style={{
-                          backgroundColor: "#10b981",
+                          background: "linear-gradient(135deg, #14b8a6, #10b981)",
                           color: "white",
                           border: "none",
-                          padding: "10px 14px",
-                          borderRadius: "10px",
+                          padding: "11px 15px",
+                          borderRadius: "12px",
                           cursor: "pointer",
                           fontSize: "14px",
-                          fontWeight: "600",
+                          fontWeight: "800",
+                          boxShadow: "0 10px 20px rgba(16,185,129,0.18)",
                         }}
                       >
                         אכלתי את זה
@@ -1127,7 +1286,7 @@ export default function App() {
                   ))}
                 </div>
               ) : (
-                <p style={{ color: "#6b7280", margin: 0 }}>
+                <p style={{ color: "#64748b", margin: 0, lineHeight: "1.6" }}>
                   עדיין אין מספיק מאכלים מותרים כדי לייצר תפריט.
                 </p>
               )}
@@ -1138,7 +1297,14 @@ export default function App() {
             </div>
 
             <div style={cardStyle}>
-              <h3 style={{ marginTop: 0, marginBottom: "14px", fontSize: "22px" }}>
+              <h3
+                style={{
+                  marginTop: 0,
+                  marginBottom: "14px",
+                  fontSize: "22px",
+                  color: "#0f172a",
+                }}
+              >
                 מתכונים שמתאימים לך
               </h3>
 
@@ -1148,70 +1314,96 @@ export default function App() {
                     <div
                       key={index}
                       style={{
-                        backgroundColor: "#f0fdf4",
-                        border: "1px solid #bbf7d0",
-                        borderRadius: "16px",
-                        padding: "14px",
+                        background: "linear-gradient(180deg, #ffffff, #f8fafc)",
+                        border: "1px solid #e2e8f0",
+                        borderRadius: "18px",
+                        padding: "16px",
                       }}
                     >
-                      <div style={{ fontSize: "17px", fontWeight: "700", color: "#111827", marginBottom: "8px" }}>
+                      <div
+                        style={{
+                          fontSize: "18px",
+                          fontWeight: "800",
+                          color: "#0f172a",
+                          marginBottom: "8px",
+                        }}
+                      >
                         {recipe.name}
                       </div>
 
-                      <div style={{ fontSize: "14px", color: "#4b5563", marginBottom: "8px" }}>
+                      <div
+                        style={{
+                          fontSize: "14px",
+                          color: "#475569",
+                          marginBottom: "8px",
+                          lineHeight: "1.6",
+                        }}
+                      >
                         {recipe.description}
                       </div>
 
-                      <div style={{ fontSize: "14px", color: "#166534", fontWeight: "600" }}>
-                        רכיבים מלאים: {(recipe.fullIngredients || recipe.ingredients).join(", ")}
+                      <div
+                        style={{
+                          fontSize: "14px",
+                          color: "#166534",
+                          fontWeight: "700",
+                          lineHeight: "1.6",
+                        }}
+                      >
+                        רכיבים מלאים:{" "}
+                        {(recipe.fullIngredients || recipe.ingredients).join(", ")}
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p style={{ color: "#6b7280", margin: 0 }}>
+                <p style={{ color: "#64748b", margin: 0, lineHeight: "1.6" }}>
                   עדיין אין מספיק מאכלים מותרים כדי להציע מתכונים.
                 </p>
               )}
             </div>
 
             <div style={cardStyle}>
-              <h3 style={{ marginTop: 0, marginBottom: "14px", fontSize: "22px" }}>
+              <h3
+                style={{
+                  marginTop: 0,
+                  marginBottom: "14px",
+                  fontSize: "22px",
+                  color: "#0f172a",
+                }}
+              >
                 מאכלים מותרים
               </h3>
 
               {currentUser.allowedFoods && currentUser.allowedFoods.length > 0 ? (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                   {currentUser.allowedFoods.map((food, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        backgroundColor: "#ecfdf5",
-                        color: "#166534",
-                        padding: "8px 12px",
-                        borderRadius: "999px",
-                        fontSize: "14px",
-                        border: "1px solid #bbf7d0",
-                      }}
-                    >
+                    <span key={index} style={chipAllowed}>
                       {food}
                     </span>
                   ))}
                 </div>
               ) : (
-                <p style={{ color: "#6b7280", margin: 0 }}>
+                <p style={{ color: "#64748b", margin: 0 }}>
                   עדיין לא זוהו מאכלים מותרים
                 </p>
               )}
             </div>
 
             <div style={cardStyle}>
-              <h3 style={{ marginTop: 0, marginBottom: "14px", fontSize: "22px" }}>
+              <h3
+                style={{
+                  marginTop: 0,
+                  marginBottom: "14px",
+                  fontSize: "22px",
+                  color: "#0f172a",
+                }}
+              >
                 מה אכלתי היום
               </h3>
 
               {meals.length === 0 ? (
-                <p style={{ color: "#6b7280", margin: 0 }}>
+                <p style={{ color: "#64748b", margin: 0 }}>
                   עדיין לא הוספת ארוחות
                 </p>
               ) : (
@@ -1221,20 +1413,26 @@ export default function App() {
                       key={index}
                       style={{
                         border: "1px solid #e5e7eb",
-                        borderRadius: "14px",
-                        padding: "12px",
-                        backgroundColor: "#f9fafb",
+                        borderRadius: "16px",
+                        padding: "14px",
+                        background: "linear-gradient(180deg, #ffffff, #f8fafc)",
                       }}
                     >
-                      <div style={{ fontSize: "16px", fontWeight: "600", color: "#111827" }}>
+                      <div
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "800",
+                          color: "#0f172a",
+                        }}
+                      >
                         {meal.name}
                       </div>
 
                       <div
                         style={{
-                          marginTop: "6px",
+                          marginTop: "8px",
                           fontSize: "14px",
-                          fontWeight: "500",
+                          fontWeight: "700",
                           color: getFeelingColor(meal.feeling),
                           marginBottom: "10px",
                         }}
@@ -1280,6 +1478,7 @@ export default function App() {
                           borderRadius: "10px",
                           cursor: "pointer",
                           fontSize: "14px",
+                          fontWeight: "700",
                         }}
                       >
                         מחק
@@ -1306,11 +1505,24 @@ export default function App() {
 
         {screen === "addMeal" && (
           <div style={cardStyle}>
-            <h1 style={{ marginTop: 0, fontSize: "30px", color: "#111827" }}>
+            <h1
+              style={{
+                marginTop: 0,
+                fontSize: "30px",
+                color: "#0f172a",
+                marginBottom: "10px",
+              }}
+            >
               הוספת ארוחה
             </h1>
 
-            <p style={{ color: "#6b7280", marginBottom: "14px" }}>
+            <p
+              style={{
+                color: "#64748b",
+                marginBottom: "14px",
+                lineHeight: "1.6",
+              }}
+            >
               כתוב מה אכלת ואיך הרגשת אחריה
             </p>
 
@@ -1321,11 +1533,25 @@ export default function App() {
               style={inputStyle}
             />
 
-            <h3 style={{ marginTop: 0, marginBottom: "12px", fontSize: "20px", color: "#111827" }}>
+            <h3
+              style={{
+                marginTop: 0,
+                marginBottom: "12px",
+                fontSize: "20px",
+                color: "#0f172a",
+              }}
+            >
               איך הרגשת אחרי האוכל?
             </h3>
 
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "8px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+                marginBottom: "8px",
+              }}
+            >
               <button
                 style={feelingButtonStyle("טוב", mealFeeling)}
                 onClick={() => setMealFeeling("טוב")}
@@ -1358,7 +1584,14 @@ export default function App() {
 
         {screen === "profile" && currentUser && (
           <div style={cardStyle}>
-            <h1 style={{ marginTop: 0, fontSize: "30px", color: "#111827" }}>
+            <h1
+              style={{
+                marginTop: 0,
+                fontSize: "30px",
+                color: "#0f172a",
+                marginBottom: "10px",
+              }}
+            >
               עריכת פרופיל
             </h1>
 
