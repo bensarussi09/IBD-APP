@@ -18,6 +18,7 @@ const foodBank = [
   "פסטה",
   "אטריות",
   "דג",
+  "דג לבן",
   "הודו",
   "יוגורט",
   "גבינה",
@@ -65,7 +66,6 @@ const foodBank = [
   "בשר",
   "בקר",
   "מרק עוף",
-  "דג לבן",
   "לחמית",
   "צנים",
   "מלח",
@@ -76,131 +76,147 @@ const foodBank = [
 
 const recipeLibrary = [
   {
-    name: "בננה עם טוסט",
-    ingredients: ["בננה", "טוסט"],
-    fullIngredients: ["בננה", "טוסט", "מעט חמאה או בלי ממרח"],
-    description: "פתרון קל ומהיר לבוקר.",
-    mealType: "בוקר",
+    name: "קערת אורז לבן עם חזה עוף וגזר מבושל",
+    ingredients: ["אורז", "עוף", "גזר"],
+    fullIngredients: ["אורז לבן", "חזה עוף", "גזר מבושל", "מעט מלח", "מעט שמן זית"],
+    description: "ארוחה עדינה, מסודרת ומאוזנת שמתאימה להרבה ימים רגישים.",
+    mealType: "צהריים",
     safeLevel: 3,
   },
   {
-    name: "חביתה עם לחם לבן",
-    ingredients: ["ביצה", "לחם לבן"],
-    fullIngredients: ["2 ביצים", "לחם לבן", "מעט מלח", "מעט שמן זית"],
-    description: "ארוחת בוקר פשוטה ונגישה.",
+    name: "מרק עוף עדין עם תפוח אדמה וקישוא",
+    ingredients: ["עוף", "תפוח אדמה", "קישוא", "מרק"],
+    fullIngredients: ["חזה עוף", "תפוח אדמה", "קישוא", "מים", "מעט מלח", "כורכום"],
+    description: "מרק חם, בסיסי ומנחם לימים רגישים יותר.",
+    mealType: "צהריים",
+    safeLevel: 3,
+  },
+  {
+    name: "פירה עם דג לבן אפוי וגזר",
+    ingredients: ["תפוח אדמה", "דג", "גזר"],
+    fullIngredients: ["פירה מתפוח אדמה", "דג לבן אפוי", "גזר מבושל", "מעט שמן זית", "מלח"],
+    description: "ארוחה רכה ונוחה לעיכול עם חלבון ופחמימה פשוטה.",
+    mealType: "ערב",
+    safeLevel: 3,
+  },
+  {
+    name: "חביתה עם לחם לבן ואבוקדו עדין",
+    ingredients: ["ביצה", "לחם לבן", "אבוקדו"],
+    fullIngredients: ["2 ביצים", "לחם לבן", "מעט אבוקדו בשל", "מעט מלח"],
+    description: "בוקר מסודר ומשביע עם מרקם עדין יחסית.",
     mealType: "בוקר",
     safeLevel: 2,
   },
   {
-    name: "דייסת שיבולת שועל עם בננה",
-    ingredients: ["שיבולת שועל", "בננה"],
+    name: "דייסת שיבולת שועל עם בננה מבושלת קלות",
+    ingredients: ["שיבולת שועל", "בננה", "מים"],
     fullIngredients: ["שיבולת שועל", "בננה", "מים", "מעט קינמון אם מתאים"],
-    description: "ארוחת בוקר עדינה יותר.",
+    description: "בוקר רך ונעים כשצריך משהו פשוט יותר.",
     mealType: "בוקר",
     safeLevel: 2,
   },
   {
-    name: "יוגורט עם בננה",
-    ingredients: ["יוגורט", "בננה"],
-    fullIngredients: ["יוגורט טבעי", "בננה"],
-    description: "בוקר קליל ומהיר.",
-    mealType: "בוקר",
-    safeLevel: 1,
+    name: "אטריות עם עוף טחון וקישוא רך",
+    ingredients: ["אטריות", "עוף טחון", "קישוא"],
+    fullIngredients: ["אטריות", "עוף טחון", "קישוא מבושל", "מעט שמן זית", "מלח"],
+    description: "מנה קלה יחסית עם מרקם רך יותר.",
+    mealType: "צהריים",
+    safeLevel: 2,
   },
   {
-    name: "אורז עם עוף",
-    ingredients: ["אורז", "עוף"],
-    fullIngredients: ["אורז לבן", "חזה עוף", "מים", "מלח", "מעט שמן זית"],
-    description: "מנה פשוטה, קלה יחסית לעיכול.",
+    name: "אורז עם דג לבן ותפוח אדמה מבושל",
+    ingredients: ["אורז", "דג", "תפוח אדמה"],
+    fullIngredients: ["אורז לבן", "דג לבן", "תפוח אדמה מבושל", "מעט מלח", "שמן זית"],
+    description: "שילוב עדין ויציב שמתאים לארוחת צהריים או ערב מוקדם.",
     mealType: "צהריים",
     safeLevel: 3,
   },
   {
-    name: "אורז עם גזר",
-    ingredients: ["אורז", "גזר"],
-    fullIngredients: ["אורז לבן", "גזר מבושל", "מים", "מלח", "מעט שמן זית"],
-    description: "שילוב עדין ופשוט.",
+    name: "קערת אורז עם הודו וגזר",
+    ingredients: ["אורז", "הודו", "גזר"],
+    fullIngredients: ["אורז לבן", "הודו", "גזר מבושל", "מעט שמן זית", "מלח"],
+    description: "חלופה טובה לעוף למי שמחפש קצת גיוון.",
     mealType: "צהריים",
     safeLevel: 3,
   },
   {
-    name: "מרק עוף עם תפוח אדמה",
-    ingredients: ["עוף", "תפוח אדמה", "מרק"],
-    fullIngredients: [
-      "חזה עוף",
-      "תפוח אדמה",
-      "גזר",
-      "מים",
-      "אבקת מרק עוף עדינה",
-      "מלח",
-      "כורכום",
-    ],
-    description: "ארוחה חמה ובסיסית.",
-    mealType: "צהריים",
+    name: "מרק קישוא, גזר ותפוח אדמה",
+    ingredients: ["קישוא", "גזר", "תפוח אדמה", "מרק"],
+    fullIngredients: ["קישוא", "גזר", "תפוח אדמה", "מים", "מעט מלח", "כורכום"],
+    description: "מרק ירקות עדין וחם שמתאים במיוחד לערב.",
+    mealType: "ערב",
     safeLevel: 3,
   },
   {
-    name: "עוף עם גזר",
-    ingredients: ["עוף", "גזר"],
-    fullIngredients: ["חזה עוף", "גזר מבושל", "מלח", "כורכום", "מעט שמן זית"],
-    description: "שילוב פשוט ועדין יחסית.",
-    mealType: "צהריים",
-    safeLevel: 3,
-  },
-  {
-    name: "פסטה עם עוף",
-    ingredients: ["פסטה", "עוף"],
-    fullIngredients: ["פסטה", "חזה עוף", "מעט מלח", "מעט שמן זית"],
-    description: "מנה טובה לגיוון.",
-    mealType: "צהריים",
-    safeLevel: 1,
-  },
-  {
-    name: "דג עם תפוח אדמה",
-    ingredients: ["דג", "תפוח אדמה"],
-    fullIngredients: ["דג לבן", "תפוח אדמה", "מלח", "מעט שמן זית"],
-    description: "מנה פשוטה שמתאימה להרבה מצבים.",
+    name: "טוסט עדין עם ביצה קשה",
+    ingredients: ["טוסט", "ביצה"],
+    fullIngredients: ["טוסט", "ביצה קשה", "מעט מלח"],
+    description: "ערב קליל יחסית כשצריך משהו מהיר ומוכר.",
     mealType: "ערב",
     safeLevel: 2,
   },
   {
-    name: "פירה עם ביצה",
-    ingredients: ["תפוח אדמה", "ביצה"],
-    fullIngredients: ["תפוחי אדמה", "ביצה קשה", "מלח", "מעט שמן זית"],
-    description: "מנה רכה ופשוטה לערב.",
-    mealType: "ערב",
-    safeLevel: 3,
-  },
-  {
-    name: "טוסט עם גבינה",
-    ingredients: ["טוסט", "גבינה"],
-    fullIngredients: ["טוסט", "גבינה עדינה"],
-    description: "ארוחת ערב קצרה ונוחה.",
-    mealType: "ערב",
+    name: "פסטה פשוטה עם עוף וגזר",
+    ingredients: ["פסטה", "עוף", "גזר"],
+    fullIngredients: ["פסטה", "חזה עוף", "גזר מבושל", "מעט שמן זית", "מלח"],
+    description: "מנה מעט יותר משביעה אך עדיין די פשוטה.",
+    mealType: "צהריים",
     safeLevel: 1,
   },
   {
-    name: "מרק קישוא וגזר",
-    ingredients: ["קישוא", "גזר", "מרק"],
-    fullIngredients: ["קישוא", "גזר", "מים", "אבקת מרק עדינה", "מלח"],
-    description: "מרק קליל וחם לערב.",
+    name: "דג לבן עם פירה וקישוא",
+    ingredients: ["דג", "פירה", "קישוא"],
+    fullIngredients: ["דג לבן", "פירה", "קישוא מבושל", "מעט מלח", "שמן זית"],
+    description: "שילוב ערב מסודר עם מרקמים רכים ונוחים.",
     mealType: "ערב",
     safeLevel: 3,
   },
   {
-    name: "קרקר עם בננה",
-    ingredients: ["קרקר", "בננה"],
-    fullIngredients: ["קרקרים פשוטים", "בננה"],
-    description: "נשנוש קל בין הארוחות.",
+    name: "יוגורט עם בננה ושיבולת שועל עדינה",
+    ingredients: ["יוגורט", "בננה", "שיבולת שועל"],
+    fullIngredients: ["יוגורט טבעי", "בננה", "מעט שיבולת שועל"],
+    description: "בוקר או ביניים למי שמוצרי חלב מתאימים לו.",
+    mealType: "בוקר",
+    safeLevel: 1,
+  },
+  {
+    name: "צנים עם אבוקדו וביצה",
+    ingredients: ["צנים", "אבוקדו", "ביצה"],
+    fullIngredients: ["צנים", "אבוקדו בשל", "ביצה קשה", "מעט מלח"],
+    description: "נשנוש משביע או ארוחת ערב קטנה.",
     mealType: "נשנוש",
+    safeLevel: 2,
+  },
+  {
+    name: "קרקרים עם גבינה עדינה וביצה קשה",
+    ingredients: ["קרקרים", "גבינה", "ביצה"],
+    fullIngredients: ["קרקרים פשוטים", "גבינה עדינה", "ביצה קשה"],
+    description: "ביניים מסודר למי שמוצרי חלב מתאימים לו.",
+    mealType: "נשנוש",
+    safeLevel: 1,
+  },
+  {
+    name: "בננה עם יוגורט",
+    ingredients: ["בננה", "יוגורט"],
+    fullIngredients: ["בננה", "יוגורט טבעי"],
+    description: "פתרון ביניים פשוט, לא ארוחה מרכזית.",
+    mealType: "נשנוש",
+    safeLevel: 1,
+  },
+  {
+    name: "פירה עם עוף טחון",
+    ingredients: ["פירה", "עוף טחון"],
+    fullIngredients: ["פירה מתפוח אדמה", "עוף טחון", "מעט מלח", "שמן זית"],
+    description: "שילוב רך יחסית לימים רגישים יותר.",
+    mealType: "ערב",
     safeLevel: 3,
   },
   {
-    name: "צנים עם ביצה קשה",
-    ingredients: ["צנים", "ביצה"],
-    fullIngredients: ["צנים", "ביצה קשה", "מעט מלח"],
-    description: "נשנוש משביע ועדין יחסית.",
-    mealType: "נשנוש",
+    name: "אורז עם ביצה קשה וגזר",
+    ingredients: ["אורז", "ביצה", "גזר"],
+    fullIngredients: ["אורז לבן", "ביצה קשה", "גזר מבושל", "מעט מלח"],
+    description: "שילוב בסיסי ופשוט כשצריך משהו מוכר.",
+    mealType: "ערב",
     safeLevel: 2,
   },
 ];
@@ -223,7 +239,6 @@ export default function App() {
     currentStatus: "רמיסיה",
     safeFoods: "",
     triggerFoods: "",
-    nutritionistNotes: "",
     nutritionText: "",
     allowedFoods: [],
     forbiddenFoods: [],
@@ -231,7 +246,6 @@ export default function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
   const [authError, setAuthError] = useState("");
-
   const [, setDailyFeeling] = useState("");
   const [mealInput, setMealInput] = useState("");
   const [mealFeeling, setMealFeeling] = useState("");
@@ -425,7 +439,6 @@ export default function App() {
 
     saveUsers([...users, newUser]);
     localStorage.setItem("currentUser", newUser.username);
-
     setCurrentUser(newUser);
     setMeals([]);
     setScreen("home");
@@ -439,7 +452,6 @@ export default function App() {
       currentStatus: "רמיסיה",
       safeFoods: "",
       triggerFoods: "",
-      nutritionistNotes: "",
       nutritionText: "",
       allowedFoods: [],
       forbiddenFoods: [],
@@ -500,7 +512,6 @@ export default function App() {
 
   const addSuggestedMealToToday = (recipe) => {
     const alreadyExists = meals.some((meal) => meal.name === recipe.name);
-
     if (alreadyExists) return;
 
     const newMeal = {
@@ -634,7 +645,7 @@ export default function App() {
       { title: "ארוחת בוקר", recipe: breakfast },
       { title: "ארוחת צהריים", recipe: lunch },
       { title: "ארוחת ערב", recipe: dinner },
-      { title: "נשנוש", recipe: snack },
+      { title: "נשנוש / ביניים", recipe: snack },
     ].filter((item) => item.recipe);
 
     setDailyMenu(menu);
@@ -650,8 +661,8 @@ export default function App() {
   }, [currentUser, filteredRecipes.length]);
 
   const getFeelingColor = (value) => {
-    if (value === "טוב") return "#16a34a";
-    if (value === "סביר") return "#d97706";
+    if (value === "טוב") return "#15803d";
+    if (value === "סביר") return "#b45309";
     if (value === "לא טוב") return "#dc2626";
     if (value === "עוד לא סימנתי") return "#64748b";
     return "#64748b";
@@ -659,18 +670,18 @@ export default function App() {
 
   const pageBackground = {
     minHeight: "100vh",
-    background: "linear-gradient(180deg, #f5fffd 0%, #eef7ff 52%, #f8fafc 100%)",
+    background: "linear-gradient(180deg, #f4fbff 0%, #eefaf8 45%, #f8fafc 100%)",
     fontFamily: "Arial, sans-serif",
   };
 
   const pageContainer = {
-    maxWidth: "460px",
+    maxWidth: "470px",
     margin: "0 auto",
   };
 
   const authWrapper = {
     ...pageBackground,
-    padding: "24px 16px",
+    padding: "22px 16px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -678,94 +689,24 @@ export default function App() {
 
   const appWrapper = {
     ...pageBackground,
-    padding: "24px 16px 32px",
+    padding: "20px 16px 30px",
   };
 
   const authCard = {
-    background: "rgba(255,255,255,0.92)",
-    backdropFilter: "blur(10px)",
-    WebkitBackdropFilter: "blur(10px)",
-    borderRadius: "28px",
+    background: "rgba(255,255,255,0.96)",
+    borderRadius: "30px",
     padding: "26px",
-    boxShadow: "0 18px 42px rgba(15,23,42,0.08)",
-    border: "1px solid rgba(226,232,240,0.85)",
-  };
-
-  const feelingButtonStyle = (value, selectedValue) => ({
-    padding: "12px 18px",
-    borderRadius: "14px",
-    border:
-      selectedValue === value ? "2px solid #14b8a6" : "1px solid #dbe4ea",
-    background:
-      selectedValue === value
-        ? "linear-gradient(135deg, #ecfeff, #f0fdfa)"
-        : "#ffffff",
-    color: "#0f172a",
-    fontSize: "15px",
-    cursor: "pointer",
-    minWidth: "92px",
-    fontWeight: "700",
-    transition: "all 0.2s ease",
-    boxShadow:
-      selectedValue === value
-        ? "0 10px 24px rgba(20,184,166,0.14)"
-        : "0 4px 12px rgba(15,23,42,0.05)",
-  });
-
-  const smallFeelingButtonStyle = (value, selectedValue) => ({
-    padding: "8px 12px",
-    borderRadius: "12px",
-    border:
-      selectedValue === value ? "2px solid #14b8a6" : "1px solid #dbe4ea",
-    background:
-      selectedValue === value
-        ? "linear-gradient(135deg, #ecfeff, #f0fdfa)"
-        : "#ffffff",
-    color: "#0f172a",
-    fontSize: "13px",
-    cursor: "pointer",
-    fontWeight: "700",
-    transition: "all 0.2s ease",
-  });
-
-  const mainButton = {
-    padding: "14px 18px",
-    borderRadius: "16px",
-    border: "none",
-    background: "linear-gradient(135deg, #14b8a6, #10b981)",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "800",
-    cursor: "pointer",
-    width: "100%",
-    marginTop: "16px",
-    boxShadow: "0 14px 28px rgba(16,185,129,0.22)",
-    transition: "all 0.2s ease",
-  };
-
-  const secondaryButton = {
-    padding: "12px 18px",
-    borderRadius: "16px",
-    border: "1px solid #dbe4ea",
-    backgroundColor: "rgba(255,255,255,0.92)",
-    color: "#0f172a",
-    fontSize: "15px",
-    fontWeight: "700",
-    cursor: "pointer",
-    width: "100%",
-    marginTop: "12px",
-    boxShadow: "0 8px 20px rgba(15,23,42,0.05)",
+    boxShadow: "0 20px 45px rgba(15,23,42,0.08)",
+    border: "1px solid #dbeafe",
   };
 
   const cardStyle = {
-    background: "rgba(255,255,255,0.9)",
-    backdropFilter: "blur(10px)",
-    WebkitBackdropFilter: "blur(10px)",
+    background: "rgba(255,255,255,0.96)",
     borderRadius: "24px",
-    padding: "22px",
-    boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
-    marginBottom: "18px",
-    border: "1px solid rgba(226,232,240,0.9)",
+    padding: "20px",
+    boxShadow: "0 14px 34px rgba(15,23,42,0.07)",
+    marginBottom: "16px",
+    border: "1px solid #e2e8f0",
   };
 
   const inputStyle = {
@@ -777,19 +718,70 @@ export default function App() {
     boxSizing: "border-box",
     marginBottom: "12px",
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#fcfefe",
+    backgroundColor: "#fcfeff",
     color: "#0f172a",
     outline: "none",
-    boxShadow: "inset 0 1px 2px rgba(15,23,42,0.03)",
   };
 
+  const mainButton = {
+    padding: "14px 18px",
+    borderRadius: "16px",
+    border: "none",
+    background: "linear-gradient(135deg, #0ea5e9, #14b8a6)",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "800",
+    cursor: "pointer",
+    width: "100%",
+    marginTop: "14px",
+    boxShadow: "0 12px 24px rgba(14,165,233,0.18)",
+  };
+
+  const secondaryButton = {
+    padding: "12px 18px",
+    borderRadius: "16px",
+    border: "1px solid #dbe4ea",
+    backgroundColor: "white",
+    color: "#0f172a",
+    fontSize: "15px",
+    fontWeight: "700",
+    cursor: "pointer",
+    width: "100%",
+    marginTop: "10px",
+  };
+
+  const feelingButtonStyle = (value, selectedValue) => ({
+    padding: "11px 16px",
+    borderRadius: "14px",
+    border:
+      selectedValue === value ? "2px solid #0ea5e9" : "1px solid #d1d5db",
+    backgroundColor: selectedValue === value ? "#eff6ff" : "white",
+    color: "#0f172a",
+    fontSize: "15px",
+    cursor: "pointer",
+    minWidth: "88px",
+    fontWeight: "700",
+  });
+
+  const smallFeelingButtonStyle = (value, selectedValue) => ({
+    padding: "8px 10px",
+    borderRadius: "12px",
+    border:
+      selectedValue === value ? "2px solid #0ea5e9" : "1px solid #d1d5db",
+    backgroundColor: selectedValue === value ? "#eff6ff" : "white",
+    color: "#0f172a",
+    fontSize: "13px",
+    cursor: "pointer",
+    fontWeight: "700",
+  });
+
   const chipAllowed = {
-    backgroundColor: "#ecfdf5",
-    color: "#166534",
+    backgroundColor: "#ecfeff",
+    color: "#0f766e",
     padding: "8px 12px",
     borderRadius: "999px",
     fontSize: "14px",
-    border: "1px solid #bbf7d0",
+    border: "1px solid #a5f3fc",
     fontWeight: "700",
   };
 
@@ -806,7 +798,7 @@ export default function App() {
   if (screen === "auth") {
     return (
       <div dir="rtl" style={authWrapper}>
-        <div style={{ maxWidth: "460px", width: "100%" }}>
+        <div style={{ maxWidth: "470px", width: "100%" }}>
           {authMode === "login" ? (
             <div style={authCard}>
               <div
@@ -819,19 +811,18 @@ export default function App() {
                   color: "#0f766e",
                   fontSize: "13px",
                   fontWeight: "700",
-                  border: "1px solid #bae6fd",
+                  border: "1px solid #a5f3fc",
                 }}
               >
-                IBD FOOD • התחברות מאובטחת
+                IBD Nutrition Assistant
               </div>
 
               <h1
                 style={{
                   marginTop: 0,
-                  marginBottom: "10px",
+                  marginBottom: "8px",
                   fontSize: "34px",
                   color: "#0f172a",
-                  lineHeight: "1.1",
                 }}
               >
                 התחברות
@@ -840,13 +831,14 @@ export default function App() {
               <p
                 style={{
                   marginTop: 0,
-                  marginBottom: "22px",
+                  marginBottom: "20px",
                   color: "#64748b",
                   fontSize: "15px",
                   lineHeight: "1.6",
                 }}
               >
-                היכנס לחשבון שלך וקבל המלצות תזונה יומיות בהתאם למצב שלך.
+                היכנס עם שם המשתמש והסיסמה שלך כדי לקבל תפריט יומי, מתכונים
+                ומעקב אישי.
               </p>
 
               <input
@@ -911,19 +903,18 @@ export default function App() {
                   color: "#0f766e",
                   fontSize: "13px",
                   fontWeight: "700",
-                  border: "1px solid #bae6fd",
+                  border: "1px solid #a5f3fc",
                 }}
               >
-                IBD FOOD • יצירת חשבון
+                פתיחת משתמש חדש
               </div>
 
               <h1
                 style={{
                   marginTop: 0,
-                  marginBottom: "10px",
+                  marginBottom: "8px",
                   fontSize: "34px",
                   color: "#0f172a",
-                  lineHeight: "1.1",
                 }}
               >
                 הרשמה
@@ -932,14 +923,14 @@ export default function App() {
               <p
                 style={{
                   marginTop: 0,
-                  marginBottom: "22px",
+                  marginBottom: "20px",
                   color: "#64748b",
                   fontSize: "15px",
                   lineHeight: "1.6",
                 }}
               >
-                מלא כמה פרטים בסיסיים כדי שנוכל להתאים לך תפריט אישי ומתכונים
-                רלוונטיים יותר.
+                צור פרופיל אישי, הזן הנחיות תזונה, והמערכת תבנה לך המלצות
+                מתאימות יותר.
               </p>
 
               <input
@@ -1145,20 +1136,18 @@ export default function App() {
           <>
             <div
               style={{
-                background: "linear-gradient(135deg, #0f766e, #14b8a6 52%, #34d399)",
+                background: "linear-gradient(135deg, #0284c7, #14b8a6)",
                 color: "white",
                 borderRadius: "28px",
-                padding: "26px",
-                boxShadow: "0 18px 45px rgba(20,184,166,0.24)",
-                marginBottom: "20px",
-                position: "relative",
-                overflow: "hidden",
+                padding: "24px",
+                boxShadow: "0 18px 38px rgba(2,132,199,0.18)",
+                marginBottom: "18px",
               }}
             >
               <div
                 style={{
                   display: "inline-block",
-                  marginBottom: "12px",
+                  marginBottom: "10px",
                   padding: "7px 12px",
                   borderRadius: "999px",
                   background: "rgba(255,255,255,0.18)",
@@ -1166,7 +1155,7 @@ export default function App() {
                   fontWeight: "700",
                 }}
               >
-                IBD FOOD • ליווי תזונתי יומי
+                תזונה מותאמת אישית
               </div>
 
               <div style={{ fontSize: "14px", opacity: 0.95, marginBottom: "8px" }}>
@@ -1176,7 +1165,7 @@ export default function App() {
               <h1
                 style={{
                   margin: 0,
-                  fontSize: "34px",
+                  fontSize: "32px",
                   lineHeight: "1.15",
                   fontWeight: "800",
                 }}
@@ -1189,7 +1178,7 @@ export default function App() {
               </div>
 
               <div style={{ marginTop: "6px", fontSize: "15px" }}>
-                מחלה: <strong>{currentUser.diseaseType}</strong>
+                אבחנה: <strong>{currentUser.diseaseType}</strong>
               </div>
             </div>
 
@@ -1197,13 +1186,26 @@ export default function App() {
               <h3
                 style={{
                   marginTop: 0,
-                  marginBottom: "14px",
-                  fontSize: "22px",
+                  marginBottom: "8px",
+                  fontSize: "23px",
                   color: "#0f172a",
                 }}
               >
-                תפריט יומי AI
+                תפריט יומי מומלץ
               </h3>
+
+              <p
+                style={{
+                  marginTop: 0,
+                  marginBottom: "16px",
+                  color: "#64748b",
+                  fontSize: "14px",
+                  lineHeight: "1.6",
+                }}
+              >
+                בנוי רק מתוך המאכלים שהמערכת זיהתה כמתאימים לך ובהתאם למצב
+                הנוכחי שלך.
+              </p>
 
               {dailyMenu.length > 0 ? (
                 <div style={{ display: "grid", gap: "12px" }}>
@@ -1211,18 +1213,17 @@ export default function App() {
                     <div
                       key={index}
                       style={{
-                        background: "linear-gradient(180deg, #f8fffd, #f0fdf4)",
-                        border: "1px solid #bbf7d0",
+                        background: "linear-gradient(180deg, #f8fdff, #f0fdfa)",
+                        border: "1px solid #bae6fd",
                         borderRadius: "18px",
                         padding: "16px",
-                        boxShadow: "0 8px 20px rgba(15,23,42,0.04)",
                       }}
                     >
                       <div
                         style={{
-                          fontSize: "14px",
+                          fontSize: "13px",
                           fontWeight: "800",
-                          color: "#0f766e",
+                          color: "#0369a1",
                           marginBottom: "6px",
                         }}
                       >
@@ -1231,7 +1232,7 @@ export default function App() {
 
                       <div
                         style={{
-                          fontSize: "20px",
+                          fontSize: "19px",
                           fontWeight: "800",
                           color: "#0f172a",
                           marginBottom: "8px",
@@ -1254,22 +1255,19 @@ export default function App() {
                       <div
                         style={{
                           fontSize: "14px",
-                          color: "#166534",
+                          color: "#0f766e",
                           fontWeight: "700",
                           marginBottom: "12px",
                           lineHeight: "1.6",
                         }}
                       >
-                        רכיבים:{" "}
-                        {(item.recipe.fullIngredients || item.recipe.ingredients).join(
-                          ", "
-                        )}
+                        רכיבים: {(item.recipe.fullIngredients || item.recipe.ingredients).join(", ")}
                       </div>
 
                       <button
                         onClick={() => addSuggestedMealToToday(item.recipe)}
                         style={{
-                          background: "linear-gradient(135deg, #14b8a6, #10b981)",
+                          background: "linear-gradient(135deg, #0284c7, #14b8a6)",
                           color: "white",
                           border: "none",
                           padding: "11px 15px",
@@ -1277,7 +1275,6 @@ export default function App() {
                           cursor: "pointer",
                           fontSize: "14px",
                           fontWeight: "800",
-                          boxShadow: "0 10px 20px rgba(16,185,129,0.18)",
                         }}
                       >
                         אכלתי את זה
@@ -1287,7 +1284,7 @@ export default function App() {
                 </div>
               ) : (
                 <p style={{ color: "#64748b", margin: 0, lineHeight: "1.6" }}>
-                  עדיין אין מספיק מאכלים מותרים כדי לייצר תפריט.
+                  עדיין אין מספיק מאכלים מותרים כדי לייצר תפריט איכותי.
                 </p>
               )}
 
@@ -1300,13 +1297,25 @@ export default function App() {
               <h3
                 style={{
                   marginTop: 0,
-                  marginBottom: "14px",
-                  fontSize: "22px",
+                  marginBottom: "8px",
+                  fontSize: "23px",
                   color: "#0f172a",
                 }}
               >
-                מתכונים שמתאימים לך
+                מנות שמתאימות לך
               </h3>
+
+              <p
+                style={{
+                  marginTop: 0,
+                  marginBottom: "16px",
+                  color: "#64748b",
+                  fontSize: "14px",
+                  lineHeight: "1.6",
+                }}
+              >
+                כאן תראה מנות יותר מלאות ורלוונטיות, לא רק שילובים קטנים.
+              </p>
 
               {filteredRecipes.length > 0 ? (
                 <div style={{ display: "grid", gap: "12px" }}>
@@ -1314,7 +1323,7 @@ export default function App() {
                     <div
                       key={index}
                       style={{
-                        background: "linear-gradient(180deg, #ffffff, #f8fafc)",
+                        background: "white",
                         border: "1px solid #e2e8f0",
                         borderRadius: "18px",
                         padding: "16px",
@@ -1345,20 +1354,19 @@ export default function App() {
                       <div
                         style={{
                           fontSize: "14px",
-                          color: "#166534",
+                          color: "#0f766e",
                           fontWeight: "700",
                           lineHeight: "1.6",
                         }}
                       >
-                        רכיבים מלאים:{" "}
-                        {(recipe.fullIngredients || recipe.ingredients).join(", ")}
+                        רכיבים מלאים: {(recipe.fullIngredients || recipe.ingredients).join(", ")}
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p style={{ color: "#64748b", margin: 0, lineHeight: "1.6" }}>
-                  עדיין אין מספיק מאכלים מותרים כדי להציע מתכונים.
+                <p style={{ color: "#64748b", margin: 0 }}>
+                  עדיין אין מספיק מאכלים מותרים כדי להציע מנות.
                 </p>
               )}
             </div>
@@ -1372,7 +1380,7 @@ export default function App() {
                   color: "#0f172a",
                 }}
               >
-                מאכלים מותרים
+                מאכלים מותרים שזוהו
               </h3>
 
               {currentUser.allowedFoods && currentUser.allowedFoods.length > 0 ? (
@@ -1385,7 +1393,7 @@ export default function App() {
                 </div>
               ) : (
                 <p style={{ color: "#64748b", margin: 0 }}>
-                  עדיין לא זוהו מאכלים מותרים
+                  עדיין לא זוהו מאכלים מותרים.
                 </p>
               )}
             </div>
@@ -1404,7 +1412,7 @@ export default function App() {
 
               {meals.length === 0 ? (
                 <p style={{ color: "#64748b", margin: 0 }}>
-                  עדיין לא הוספת ארוחות
+                  עדיין לא הוספת ארוחות.
                 </p>
               ) : (
                 <div style={{ display: "grid", gap: "10px" }}>
@@ -1415,7 +1423,7 @@ export default function App() {
                         border: "1px solid #e5e7eb",
                         borderRadius: "16px",
                         padding: "14px",
-                        background: "linear-gradient(180deg, #ffffff, #f8fafc)",
+                        background: "#ffffff",
                       }}
                     >
                       <div
@@ -1523,7 +1531,7 @@ export default function App() {
                 lineHeight: "1.6",
               }}
             >
-              כתוב מה אכלת ואיך הרגשת אחריה
+              כתוב מה אכלת ואיך הרגשת אחריה.
             </p>
 
             <input
