@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import "./App.css";
 
 const foodBank = [
   "אורז",
@@ -76,154 +77,234 @@ const foodBank = [
 
 const recipeLibrary = [
   {
-    name: "קערת אורז לבן עם חזה עוף וגזר מבושל",
+    name: "טוסט עם אבוקדו וביצה",
+    ingredients: ["טוסט", "אבוקדו", "ביצה"],
+    fullIngredients: ["טוסט", "אבוקדו בשל", "ביצה", "מעט מלח"],
+    description: "לחם קלוי עם אבוקדו, ביצה קשה ומרקם נעים.",
+    mealType: "בוקר",
+    safeLevel: 2,
+    isSoup: false,
+    tag: "עשיר בחלבון",
+    image:
+      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "דייסת שיבולת שועל עם בננה",
+    ingredients: ["דייסה", "שיבולת שועל", "בננה"],
+    fullIngredients: ["דייסת שיבולת שועל", "בננה", "מעט מים"],
+    description: "דייסה חמה, רכה ונעימה לבוקר רגוע יותר.",
+    mealType: "בוקר",
+    safeLevel: 2,
+    isSoup: false,
+    tag: "בוקר רגוע",
+    image:
+      "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "יוגורט עם בננה ושיבולת שועל",
+    ingredients: ["יוגורט", "בננה", "שיבולת שועל"],
+    fullIngredients: ["יוגורט טבעי", "בננה", "מעט שיבולת שועל"],
+    description: "מעדן בוקר קליל, קרמי ומשביע יחסית.",
+    mealType: "בוקר",
+    safeLevel: 1,
+    isSoup: false,
+    tag: "קל להכנה",
+    image:
+      "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "טוסט עם גבינה עדינה",
+    ingredients: ["טוסט", "גבינה"],
+    fullIngredients: ["טוסט", "גבינה עדינה"],
+    description: "בוקר פשוט, מהיר ומאוזן למי שמתאים לו חלב.",
+    mealType: "בוקר",
+    safeLevel: 1,
+    isSoup: false,
+    tag: "בוקר קלאסי",
+    image:
+      "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "אורז עם עוף וגזר",
     ingredients: ["אורז", "עוף", "גזר"],
     fullIngredients: ["אורז לבן", "חזה עוף", "גזר מבושל", "מעט מלח", "מעט שמן זית"],
-    description: "ארוחה עדינה, מסודרת ומאוזנת שמתאימה להרבה ימים רגישים.",
+    description: "מנה מאוזנת, מסודרת ונוחה לעיכול יחסית.",
     mealType: "צהריים",
     safeLevel: 3,
+    isSoup: false,
+    tag: "ארוחת צהריים",
+    image:
+      "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
   },
   {
-    name: "מרק עוף עדין עם תפוח אדמה וקישוא",
-    ingredients: ["עוף", "תפוח אדמה", "קישוא", "מרק"],
-    fullIngredients: ["חזה עוף", "תפוח אדמה", "קישוא", "מים", "מעט מלח", "כורכום"],
-    description: "מרק חם, בסיסי ומנחם לימים רגישים יותר.",
+    name: "פסטה עם עוף וגזר",
+    ingredients: ["פסטה", "עוף", "גזר"],
+    fullIngredients: ["פסטה", "חזה עוף", "גזר מבושל", "מעט שמן זית", "מלח"],
+    description: "פסטה עדינה יחסית עם חלבון פשוט וירק מבושל.",
     mealType: "צהריים",
-    safeLevel: 3,
+    safeLevel: 1,
+    isSoup: false,
+    tag: "מגוון",
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&w=900&q=80",
   },
   {
-    name: "פירה עם דג לבן אפוי וגזר",
-    ingredients: ["תפוח אדמה", "דג", "גזר"],
-    fullIngredients: ["פירה מתפוח אדמה", "דג לבן אפוי", "גזר מבושל", "מעט שמן זית", "מלח"],
-    description: "ארוחה רכה ונוחה לעיכול עם חלבון ופחמימה פשוטה.",
-    mealType: "ערב",
-    safeLevel: 3,
-  },
-  {
-    name: "חביתה עם לחם לבן ואבוקדו עדין",
-    ingredients: ["ביצה", "לחם לבן", "אבוקדו"],
-    fullIngredients: ["2 ביצים", "לחם לבן", "מעט אבוקדו בשל", "מעט מלח"],
-    description: "בוקר מסודר ומשביע עם מרקם עדין יחסית.",
-    mealType: "בוקר",
-    safeLevel: 2,
-  },
-  {
-    name: "דייסת שיבולת שועל עם בננה מבושלת קלות",
-    ingredients: ["שיבולת שועל", "בננה", "מים"],
-    fullIngredients: ["שיבולת שועל", "בננה", "מים", "מעט קינמון אם מתאים"],
-    description: "בוקר רך ונעים כשצריך משהו פשוט יותר.",
-    mealType: "בוקר",
-    safeLevel: 2,
-  },
-  {
-    name: "אטריות עם עוף טחון וקישוא רך",
-    ingredients: ["אטריות", "עוף טחון", "קישוא"],
-    fullIngredients: ["אטריות", "עוף טחון", "קישוא מבושל", "מעט שמן זית", "מלח"],
-    description: "מנה קלה יחסית עם מרקם רך יותר.",
+    name: "אורז עם דג לבן וגזר",
+    ingredients: ["אורז", "דג", "גזר"],
+    fullIngredients: ["אורז לבן", "דג לבן", "גזר מבושל", "מעט מלח", "שמן זית"],
+    description: "שילוב נקי ועדין עם דג לבן ואורז.",
     mealType: "צהריים",
     safeLevel: 2,
-  },
-  {
-    name: "אורז עם דג לבן ותפוח אדמה מבושל",
-    ingredients: ["אורז", "דג", "תפוח אדמה"],
-    fullIngredients: ["אורז לבן", "דג לבן", "תפוח אדמה מבושל", "מעט מלח", "שמן זית"],
-    description: "שילוב עדין ויציב שמתאים לארוחת צהריים או ערב מוקדם.",
-    mealType: "צהריים",
-    safeLevel: 3,
+    isSoup: false,
+    tag: "צהריים עדין",
+    image:
+      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "קערת אורז עם הודו וגזר",
     ingredients: ["אורז", "הודו", "גזר"],
-    fullIngredients: ["אורז לבן", "הודו", "גזר מבושל", "מעט שמן זית", "מלח"],
-    description: "חלופה טובה לעוף למי שמחפש קצת גיוון.",
+    fullIngredients: ["אורז לבן", "הודו", "גזר מבושל", "מעט מלח", "שמן זית"],
+    description: "חלופה טובה לעוף עם מרקם נעים ופשוט.",
     mealType: "צהריים",
     safeLevel: 3,
+    isSoup: false,
+    tag: "חלבון רזה",
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80",
   },
   {
-    name: "מרק קישוא, גזר ותפוח אדמה",
-    ingredients: ["קישוא", "גזר", "תפוח אדמה", "מרק"],
-    fullIngredients: ["קישוא", "גזר", "תפוח אדמה", "מים", "מעט מלח", "כורכום"],
-    description: "מרק ירקות עדין וחם שמתאים במיוחד לערב.",
+    name: "פירה עם דג לבן וקישוא",
+    ingredients: ["פירה", "דג", "קישוא"],
+    fullIngredients: ["פירה", "דג לבן", "קישוא מבושל", "מעט מלח", "שמן זית"],
+    description: "ארוחת ערב רכה, מסודרת ונעימה.",
     mealType: "ערב",
     safeLevel: 3,
-  },
-  {
-    name: "טוסט עדין עם ביצה קשה",
-    ingredients: ["טוסט", "ביצה"],
-    fullIngredients: ["טוסט", "ביצה קשה", "מעט מלח"],
-    description: "ערב קליל יחסית כשצריך משהו מהיר ומוכר.",
-    mealType: "ערב",
-    safeLevel: 2,
-  },
-  {
-    name: "פסטה פשוטה עם עוף וגזר",
-    ingredients: ["פסטה", "עוף", "גזר"],
-    fullIngredients: ["פסטה", "חזה עוף", "גזר מבושל", "מעט שמן זית", "מלח"],
-    description: "מנה מעט יותר משביעה אך עדיין די פשוטה.",
-    mealType: "צהריים",
-    safeLevel: 1,
-  },
-  {
-    name: "דג לבן עם פירה וקישוא",
-    ingredients: ["דג", "פירה", "קישוא"],
-    fullIngredients: ["דג לבן", "פירה", "קישוא מבושל", "מעט מלח", "שמן זית"],
-    description: "שילוב ערב מסודר עם מרקמים רכים ונוחים.",
-    mealType: "ערב",
-    safeLevel: 3,
-  },
-  {
-    name: "יוגורט עם בננה ושיבולת שועל עדינה",
-    ingredients: ["יוגורט", "בננה", "שיבולת שועל"],
-    fullIngredients: ["יוגורט טבעי", "בננה", "מעט שיבולת שועל"],
-    description: "בוקר או ביניים למי שמוצרי חלב מתאימים לו.",
-    mealType: "בוקר",
-    safeLevel: 1,
-  },
-  {
-    name: "צנים עם אבוקדו וביצה",
-    ingredients: ["צנים", "אבוקדו", "ביצה"],
-    fullIngredients: ["צנים", "אבוקדו בשל", "ביצה קשה", "מעט מלח"],
-    description: "נשנוש משביע או ארוחת ערב קטנה.",
-    mealType: "נשנוש",
-    safeLevel: 2,
-  },
-  {
-    name: "קרקרים עם גבינה עדינה וביצה קשה",
-    ingredients: ["קרקרים", "גבינה", "ביצה"],
-    fullIngredients: ["קרקרים פשוטים", "גבינה עדינה", "ביצה קשה"],
-    description: "ביניים מסודר למי שמוצרי חלב מתאימים לו.",
-    mealType: "נשנוש",
-    safeLevel: 1,
-  },
-  {
-    name: "בננה עם יוגורט",
-    ingredients: ["בננה", "יוגורט"],
-    fullIngredients: ["בננה", "יוגורט טבעי"],
-    description: "פתרון ביניים פשוט, לא ארוחה מרכזית.",
-    mealType: "נשנוש",
-    safeLevel: 1,
+    isSoup: false,
+    tag: "ערב",
+    image:
+      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "פירה עם עוף טחון",
     ingredients: ["פירה", "עוף טחון"],
     fullIngredients: ["פירה מתפוח אדמה", "עוף טחון", "מעט מלח", "שמן זית"],
-    description: "שילוב רך יחסית לימים רגישים יותר.",
+    description: "שילוב רך ומשביע יחסית לימים עדינים יותר.",
     mealType: "ערב",
     safeLevel: 3,
+    isSoup: false,
+    tag: "רך ונוח",
+    image:
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "אורז עם ביצה קשה וגזר",
     ingredients: ["אורז", "ביצה", "גזר"],
     fullIngredients: ["אורז לבן", "ביצה קשה", "גזר מבושל", "מעט מלח"],
-    description: "שילוב בסיסי ופשוט כשצריך משהו מוכר.",
+    description: "מנה בסיסית וטובה לערב קליל יותר.",
     mealType: "ערב",
     safeLevel: 2,
+    isSoup: false,
+    tag: "ערב קל",
+    image:
+      "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=900&q=80",
   },
+  {
+    name: "קרקרים עם גבינה וביצה קשה",
+    ingredients: ["קרקרים", "גבינה", "ביצה"],
+    fullIngredients: ["קרקרים", "גבינה עדינה", "ביצה קשה"],
+    description: "נשנוש או ארוחת ביניים קטנה ומשביעה.",
+    mealType: "נשנוש",
+    safeLevel: 1,
+    isSoup: false,
+    tag: "נשנוש",
+    image:
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "צנים עם אבוקדו וביצה",
+    ingredients: ["צנים", "אבוקדו", "ביצה"],
+    fullIngredients: ["צנים", "אבוקדו בשל", "ביצה קשה", "מעט מלח"],
+    description: "ביניים טוב עם שובע נעים וטעם מאוזן.",
+    mealType: "נשנוש",
+    safeLevel: 2,
+    isSoup: false,
+    tag: "ביניים",
+    image:
+      "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "מרק עוף עם תפוח אדמה וקישוא",
+    ingredients: ["עוף", "תפוח אדמה", "קישוא", "מרק"],
+    fullIngredients: ["חזה עוף", "תפוח אדמה", "קישוא", "מים", "מעט מלח", "כורכום"],
+    description: "מרק קלאסי, חם ומרגיע לימים רגישים יותר.",
+    mealType: "צהריים",
+    safeLevel: 3,
+    isSoup: true,
+    tag: "מרק עוף",
+    image:
+      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "מרק גזר וקישוא עדין",
+    ingredients: ["גזר", "קישוא", "מרק"],
+    fullIngredients: ["גזר", "קישוא", "מים", "מעט מלח", "כורכום"],
+    description: "מרק ירקות חלק ונעים עם טעם עדין.",
+    mealType: "ערב",
+    safeLevel: 3,
+    isSoup: true,
+    tag: "עדין",
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "מרק תפוח אדמה וגזר",
+    ingredients: ["תפוח אדמה", "גזר", "מרק"],
+    fullIngredients: ["תפוח אדמה", "גזר", "מים", "מעט מלח"],
+    description: "מרק משביע יחסית במרקם רך ונוח.",
+    mealType: "צהריים",
+    safeLevel: 3,
+    isSoup: true,
+    tag: "משביע",
+    image:
+      "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "מרק דלעת חלק",
+    ingredients: ["דלעת", "מרק"],
+    fullIngredients: ["דלעת", "מים", "מעט מלח", "כורכום"],
+    description: "מרק עם טעם מעט מתקתק ומרקם חלק.",
+    mealType: "ערב",
+    safeLevel: 3,
+    isSoup: true,
+    tag: "דלעת",
+    image:
+      "https://images.unsplash.com/photo-1608500218808-2a7dc6f2b7f9?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "מרק עוף עם אורז",
+    ingredients: ["עוף", "אורז", "מרק"],
+    fullIngredients: ["חזה עוף", "אורז לבן", "מים", "מעט מלח"],
+    description: "מרק רך יותר עם אורז שנותן קצת יותר גוף.",
+    mealType: "צהריים",
+    safeLevel: 3,
+    isSoup: true,
+    tag: "מרק מחזק",
+    image:
+      "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const menuItems = [
+  { key: "home", label: "תפריט מומלץ", icon: "🍽️" },
+  { key: "recipes", label: "כל המתכונים", icon: "📚" },
+  { key: "addMeal", label: "מה אכלתי", icon: "🗓️" },
+  { key: "profile", label: "פרופיל אישי", icon: "👤" },
 ];
 
 export default function App() {
   const [screen, setScreen] = useState("auth");
   const [authMode, setAuthMode] = useState("login");
+  const [activeTab, setActiveTab] = useState("home");
 
   const [loginData, setLoginData] = useState({
     username: "",
@@ -260,6 +341,7 @@ export default function App() {
       if (foundUser) {
         setCurrentUser(foundUser);
         setScreen("home");
+        setActiveTab("home");
         loadUserMeals(foundUser.username);
       }
     }
@@ -309,9 +391,7 @@ export default function App() {
       .filter((item) => item.length > 1);
   };
 
-  const uniqueArray = (arr) => {
-    return [...new Set(arr.filter(Boolean))];
-  };
+  const uniqueArray = (arr) => [...new Set(arr.filter(Boolean))];
 
   const parseNutritionText = (text) => {
     const allowed = [];
@@ -353,14 +433,12 @@ export default function App() {
       const hasAllowedKeyword = allowedKeywords.some((keyword) =>
         lower.includes(keyword)
       );
-
       const hasForbiddenKeyword = forbiddenKeywords.some((keyword) =>
         lower.includes(keyword)
       );
 
       if (hasAllowedKeyword) currentMode = "allowed";
       if (hasForbiddenKeyword) currentMode = "forbidden";
-
       if (!currentMode) return;
 
       foodBank.forEach((food) => {
@@ -379,13 +457,8 @@ export default function App() {
         foodBank.some((food) => normalizeFood(food) === normalizeFood(item))
       );
 
-      if (currentMode === "allowed") {
-        allowed.push(...detectedParts);
-      }
-
-      if (currentMode === "forbidden") {
-        forbidden.push(...detectedParts);
-      }
+      if (currentMode === "allowed") allowed.push(...detectedParts);
+      if (currentMode === "forbidden") forbidden.push(...detectedParts);
     });
 
     return {
@@ -442,6 +515,7 @@ export default function App() {
     setCurrentUser(newUser);
     setMeals([]);
     setScreen("home");
+    setActiveTab("home");
 
     setRegisterData({
       username: "",
@@ -482,6 +556,7 @@ export default function App() {
     setCurrentUser(foundUser);
     loadUserMeals(foundUser.username);
     setScreen("home");
+    setActiveTab("home");
     setLoginData({ username: "", password: "" });
   };
 
@@ -494,6 +569,7 @@ export default function App() {
     setMealFeeling("");
     setDailyMenu([]);
     setScreen("auth");
+    setActiveTab("home");
   };
 
   const saveMeal = () => {
@@ -508,6 +584,7 @@ export default function App() {
     setMealInput("");
     setMealFeeling("");
     setScreen("home");
+    setActiveTab("home");
   };
 
   const addSuggestedMealToToday = (recipe) => {
@@ -570,6 +647,7 @@ export default function App() {
     setCurrentUser(updatedUser);
     localStorage.setItem("currentUser", updatedUser.username);
     setScreen("home");
+    setActiveTab("home");
   };
 
   const filteredRecipes = useMemo(() => {
@@ -584,7 +662,7 @@ export default function App() {
     if (currentUser.currentStatus === "רגיש") minSafeLevel = 2;
     if (currentUser.currentStatus === "התלקחות") minSafeLevel = 3;
 
-    return recipeLibrary.filter((recipe) => {
+    let base = recipeLibrary.filter((recipe) => {
       const normalizedIngredients = recipe.ingredients.map((i) =>
         normalizeFood(i)
       );
@@ -601,6 +679,12 @@ export default function App() {
 
       return allAllowed && !hasForbidden && matchesSafety;
     });
+
+    if (currentUser.currentStatus === "התלקחות") {
+      base = base.filter((recipe) => recipe.isSoup);
+    }
+
+    return base;
   }, [currentUser]);
 
   const shuffleArray = (array) => {
@@ -618,34 +702,43 @@ export default function App() {
       return;
     }
 
-    const breakfastOptions = filteredRecipes.filter(
-      (recipe) => recipe.mealType === "בוקר"
+    if (currentUser?.currentStatus === "התלקחות") {
+      const soupOptions = shuffleArray(filteredRecipes.filter((recipe) => recipe.isSoup));
+      const flareMenu = [
+        { title: "מרק בוקר", recipe: soupOptions[0] || null },
+        { title: "מרק צהריים", recipe: soupOptions[1] || soupOptions[0] || null },
+        { title: "מרק ערב", recipe: soupOptions[2] || soupOptions[0] || null },
+      ].filter((item) => item.recipe);
+
+      setDailyMenu(flareMenu);
+      return;
+    }
+
+    const breakfastOptions = shuffleArray(
+      filteredRecipes.filter((recipe) => recipe.mealType === "בוקר")
     );
-    const lunchOptions = filteredRecipes.filter(
-      (recipe) => recipe.mealType === "צהריים"
+    const lunchOptions = shuffleArray(
+      filteredRecipes.filter((recipe) => recipe.mealType === "צהריים")
     );
-    const dinnerOptions = filteredRecipes.filter(
-      (recipe) => recipe.mealType === "ערב"
+    const dinnerOptions = shuffleArray(
+      filteredRecipes.filter((recipe) => recipe.mealType === "ערב")
     );
-    const snackOptions = filteredRecipes.filter(
-      (recipe) => recipe.mealType === "נשנוש"
+    const snackOptions = shuffleArray(
+      filteredRecipes.filter((recipe) => recipe.mealType === "נשנוש")
     );
 
     const fallback = shuffleArray(filteredRecipes);
 
-    const pickOne = (arr, fallbackIndex) =>
-      arr.length ? shuffleArray(arr)[0] : fallback[fallbackIndex] || null;
-
-    const breakfast = pickOne(breakfastOptions, 0);
-    const lunch = pickOne(lunchOptions, 1);
-    const dinner = pickOne(dinnerOptions, 2);
-    const snack = pickOne(snackOptions, 3);
+    const breakfast = breakfastOptions[0] || fallback[0] || null;
+    const lunch = lunchOptions[0] || fallback[1] || null;
+    const dinner = dinnerOptions[0] || fallback[2] || null;
+    const snack = snackOptions[0] || fallback[3] || null;
 
     const menu = [
       { title: "ארוחת בוקר", recipe: breakfast },
       { title: "ארוחת צהריים", recipe: lunch },
       { title: "ארוחת ערב", recipe: dinner },
-      { title: "נשנוש / ביניים", recipe: snack },
+      { title: "נשנוש", recipe: snack },
     ].filter((item) => item.recipe);
 
     setDailyMenu(menu);
@@ -668,177 +761,328 @@ export default function App() {
     return "#64748b";
   };
 
-  const pageBackground = {
-    minHeight: "100vh",
-    background: "linear-gradient(180deg, #f4fbff 0%, #eefaf8 45%, #f8fafc 100%)",
-    fontFamily: "Arial, sans-serif",
-  };
+  const allowedCount = currentUser?.allowedFoods?.length || 0;
+  const forbiddenCount = currentUser?.forbiddenFoods?.length || 0;
 
-  const pageContainer = {
-    maxWidth: "470px",
-    margin: "0 auto",
-  };
+  const renderHomeDashboard = () => (
+    <>
+      <div className="hero-card">
+        <div className="hero-badge">👋 שלום {currentUser.fullName}</div>
+        <h1>הנה התפריט המותאם אישית שלך להיום</h1>
+        <p>
+          נוצר במיוחד עבורך בהתבסס על ההעדפות התזונתיות שלך, המצב הנוכחי והמאכלים
+          שהזנת.
+        </p>
+      </div>
 
-  const authWrapper = {
-    ...pageBackground,
-    padding: "22px 16px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
+      <section className="section-block">
+        <div className="section-header">
+          <div>
+            <h2>תפריט יומי מומלץ</h2>
+            <p>החלפנו עבורך מגוון ארוחות טעימות ומדויקות.</p>
+          </div>
+        </div>
 
-  const appWrapper = {
-    ...pageBackground,
-    padding: "20px 16px 30px",
-  };
+        <div className="daily-menu-grid">
+          {dailyMenu.length > 0 ? (
+            dailyMenu.map((item, index) => (
+              <div className="daily-menu-card" key={`${item.title}-${index}`}>
+                <div className="daily-menu-topline">{item.title}</div>
+                <div className="daily-menu-title">{item.recipe.name}</div>
+                <div className="daily-menu-desc">{item.recipe.description}</div>
+                <div className="daily-menu-tag">{item.recipe.tag}</div>
+                <button
+                  className="outline-action-button"
+                  onClick={() => addSuggestedMealToToday(item.recipe)}
+                >
+                  הוספתי שאכלתי ✓
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className="empty-state">
+              עדיין אין מספיק מאכלים מותרים כדי לייצר תפריט איכותי.
+            </div>
+          )}
+        </div>
 
-  const authCard = {
-    background: "rgba(255,255,255,0.96)",
-    borderRadius: "30px",
-    padding: "26px",
-    boxShadow: "0 20px 45px rgba(15,23,42,0.08)",
-    border: "1px solid #dbeafe",
-  };
+        <div className="centered-action">
+          <button className="refresh-button" onClick={generateDailyMenu}>
+            תפריט חדש ומגוון ↻
+          </button>
+        </div>
+      </section>
 
-  const cardStyle = {
-    background: "rgba(255,255,255,0.96)",
-    borderRadius: "24px",
-    padding: "20px",
-    boxShadow: "0 14px 34px rgba(15,23,42,0.07)",
-    marginBottom: "16px",
-    border: "1px solid #e2e8f0",
-  };
+      <section className="section-block">
+        <div className="section-header">
+          <div>
+            <h2>מתכונים מותאמים לך</h2>
+            <p>מגוון רחב של אפשרויות טעימות לפי ההגבלות שלך.</p>
+          </div>
 
-  const inputStyle = {
-    width: "100%",
-    padding: "15px 16px",
-    borderRadius: "16px",
-    border: "1px solid #dbe4ea",
-    fontSize: "16px",
-    boxSizing: "border-box",
-    marginBottom: "12px",
-    fontFamily: "Arial, sans-serif",
-    backgroundColor: "#fcfeff",
-    color: "#0f172a",
-    outline: "none",
-  };
+          <div className="recipe-filters">
+            <button className="pill active">הכל</button>
+            <button className="pill">בוקר</button>
+            <button className="pill">צהריים</button>
+            <button className="pill">ערב</button>
+            <button className="pill">נשנוש</button>
+          </div>
+        </div>
 
-  const mainButton = {
-    padding: "14px 18px",
-    borderRadius: "16px",
-    border: "none",
-    background: "linear-gradient(135deg, #0ea5e9, #14b8a6)",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "800",
-    cursor: "pointer",
-    width: "100%",
-    marginTop: "14px",
-    boxShadow: "0 12px 24px rgba(14,165,233,0.18)",
-  };
+        {filteredRecipes.length > 0 ? (
+          <div className="recipe-grid">
+            {filteredRecipes.map((recipe, index) => (
+              <div className="recipe-card" key={`${recipe.name}-${index}`}>
+                <div className="recipe-image-wrap">
+                  <img src={recipe.image} alt={recipe.name} className="recipe-image" />
+                </div>
 
-  const secondaryButton = {
-    padding: "12px 18px",
-    borderRadius: "16px",
-    border: "1px solid #dbe4ea",
-    backgroundColor: "white",
-    color: "#0f172a",
-    fontSize: "15px",
-    fontWeight: "700",
-    cursor: "pointer",
-    width: "100%",
-    marginTop: "10px",
-  };
+                <div className="recipe-content">
+                  <h3>{recipe.name}</h3>
+                  <p>{recipe.description}</p>
 
-  const feelingButtonStyle = (value, selectedValue) => ({
-    padding: "11px 16px",
-    borderRadius: "14px",
-    border:
-      selectedValue === value ? "2px solid #0ea5e9" : "1px solid #d1d5db",
-    backgroundColor: selectedValue === value ? "#eff6ff" : "white",
-    color: "#0f172a",
-    fontSize: "15px",
-    cursor: "pointer",
-    minWidth: "88px",
-    fontWeight: "700",
-  });
+                  <div className="recipe-meta-row">
+                    <span className="meta-chip blue">{recipe.mealType}</span>
+                    <span className="meta-chip green">{recipe.tag}</span>
+                  </div>
 
-  const smallFeelingButtonStyle = (value, selectedValue) => ({
-    padding: "8px 10px",
-    borderRadius: "12px",
-    border:
-      selectedValue === value ? "2px solid #0ea5e9" : "1px solid #d1d5db",
-    backgroundColor: selectedValue === value ? "#eff6ff" : "white",
-    color: "#0f172a",
-    fontSize: "13px",
-    cursor: "pointer",
-    fontWeight: "700",
-  });
+                  <div className="recipe-ingredients">
+                    {recipe.fullIngredients.join(", ")}
+                  </div>
 
-  const chipAllowed = {
-    backgroundColor: "#ecfeff",
-    color: "#0f766e",
-    padding: "8px 12px",
-    borderRadius: "999px",
-    fontSize: "14px",
-    border: "1px solid #a5f3fc",
-    fontWeight: "700",
-  };
+                  <button
+                    className="ghost-button"
+                    onClick={() => addSuggestedMealToToday(recipe)}
+                  >
+                    הצג מתכון
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-state">
+            עדיין אין מספיק מאכלים מותרים כדי להציע מתכונים.
+          </div>
+        )}
+      </section>
 
-  const chipForbidden = {
-    backgroundColor: "#fef2f2",
-    color: "#991b1b",
-    padding: "8px 12px",
-    borderRadius: "999px",
-    fontSize: "14px",
-    border: "1px solid #fecaca",
-    fontWeight: "700",
-  };
+      {currentUser.currentStatus === "התלקחות" && (
+        <section className="warning-box">
+          <h3>התלקחות – הנחיות מיוחדות ⚠️</h3>
+          <p>
+            במצב התלקחות, אנחנו מציגים לך כרגע מנות עדינות יותר ובמיוחד מרקים רכים
+            וקלים לעיכול.
+          </p>
+          <div className="warning-chips">
+            <span>מרק עוף</span>
+            <span>מרק דלעת</span>
+            <span>מרק גזר</span>
+            <span>מרק תפוח אדמה</span>
+            <span>מרק קישוא</span>
+          </div>
+        </section>
+      )}
+    </>
+  );
+
+  const renderAllRecipes = () => (
+    <section className="section-block">
+      <div className="section-header">
+        <div>
+          <h2>כל המתכונים</h2>
+          <p>כל מה שהמערכת מצאה כמתאים למצבך הנוכחי.</p>
+        </div>
+      </div>
+
+      {filteredRecipes.length > 0 ? (
+        <div className="recipe-grid">
+          {filteredRecipes.map((recipe, index) => (
+            <div className="recipe-card" key={`${recipe.name}-${index}`}>
+              <div className="recipe-image-wrap">
+                <img src={recipe.image} alt={recipe.name} className="recipe-image" />
+              </div>
+
+              <div className="recipe-content">
+                <h3>{recipe.name}</h3>
+                <p>{recipe.description}</p>
+
+                <div className="recipe-meta-row">
+                  <span className="meta-chip blue">{recipe.mealType}</span>
+                  <span className="meta-chip green">{recipe.tag}</span>
+                </div>
+
+                <div className="recipe-ingredients">
+                  {recipe.fullIngredients.join(", ")}
+                </div>
+
+                <button
+                  className="ghost-button"
+                  onClick={() => addSuggestedMealToToday(recipe)}
+                >
+                  הוספתי לארוחות
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">לא נמצאו כרגע מתכונים שמתאימים לפרופיל שלך.</div>
+      )}
+    </section>
+  );
+
+  const renderMeals = () => (
+    <section className="section-block">
+      <div className="section-header">
+        <div>
+          <h2>היסטוריית ארוחות</h2>
+          <p>כתוב מה אכלת ועדכן איך הרגשת אחר כך.</p>
+        </div>
+      </div>
+
+      <div className="add-meal-box">
+        <input
+          placeholder="מה אכלת?"
+          value={mealInput}
+          onChange={(e) => setMealInput(e.target.value)}
+          className="text-input"
+        />
+
+        <div className="feelings-row">
+          <button
+            className={`feeling-btn ${mealFeeling === "טוב" ? "active" : ""}`}
+            onClick={() => setMealFeeling("טוב")}
+          >
+            טוב
+          </button>
+          <button
+            className={`feeling-btn ${mealFeeling === "סביר" ? "active" : ""}`}
+            onClick={() => setMealFeeling("סביר")}
+          >
+            סביר
+          </button>
+          <button
+            className={`feeling-btn ${mealFeeling === "לא טוב" ? "active" : ""}`}
+            onClick={() => setMealFeeling("לא טוב")}
+          >
+            לא טוב
+          </button>
+        </div>
+
+        <button className="primary-full-button" onClick={saveMeal}>
+          שמור ארוחה
+        </button>
+      </div>
+
+      {meals.length > 0 ? (
+        <div className="meal-history-list">
+          {meals.map((meal, index) => (
+            <div className="meal-history-card" key={`${meal.name}-${index}`}>
+              <div>
+                <div className="meal-history-title">{meal.name}</div>
+                <div
+                  className="meal-history-feeling"
+                  style={{ color: getFeelingColor(meal.feeling) }}
+                >
+                  הרגשתי אחרי זה: {meal.feeling}
+                </div>
+              </div>
+
+              <div className="meal-history-actions">
+                <button onClick={() => updateMealFeeling(index, "טוב")}>טוב</button>
+                <button onClick={() => updateMealFeeling(index, "סביר")}>סביר</button>
+                <button onClick={() => updateMealFeeling(index, "לא טוב")}>לא טוב</button>
+                <button className="delete-btn" onClick={() => deleteMeal(index)}>
+                  מחק
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">עדיין לא הוספת ארוחות להיסטוריה שלך.</div>
+      )}
+    </section>
+  );
+
+  const renderProfile = () => (
+    <section className="section-block">
+      <div className="section-header">
+        <div>
+          <h2>פרופיל אישי</h2>
+          <p>עדכן פרטים כדי לחדד את ההמלצות והתפריט.</p>
+        </div>
+      </div>
+
+      <div className="profile-form-grid">
+        <input
+          placeholder="שם מלא"
+          value={currentUser.fullName}
+          onChange={(e) => updateCurrentUserField("fullName", e.target.value)}
+          className="text-input"
+        />
+
+        <input
+          placeholder="גיל"
+          value={currentUser.age}
+          onChange={(e) => updateCurrentUserField("age", e.target.value)}
+          className="text-input"
+        />
+
+        <select
+          value={currentUser.currentStatus}
+          onChange={(e) => updateCurrentUserField("currentStatus", e.target.value)}
+          className="text-input"
+        >
+          <option>רמיסיה</option>
+          <option>רגיש</option>
+          <option>התלקחות</option>
+        </select>
+
+        <textarea
+          placeholder="מאכלים שבטוחים לי"
+          value={currentUser.safeFoods}
+          onChange={(e) => updateCurrentUserField("safeFoods", e.target.value)}
+          className="text-input text-area"
+        />
+
+        <textarea
+          placeholder="מאכלים שעושים לי לא טוב"
+          value={currentUser.triggerFoods}
+          onChange={(e) => updateCurrentUserField("triggerFoods", e.target.value)}
+          className="text-input text-area"
+        />
+
+        <textarea
+          placeholder="הדבק כאן את תקציר התזונאית"
+          value={currentUser.nutritionText || ""}
+          onChange={(e) => updateCurrentUserField("nutritionText", e.target.value)}
+          className="text-input text-area large"
+        />
+
+        <button className="secondary-full-button" onClick={saveProfileChanges}>
+          נתח מחדש את התקציר
+        </button>
+
+        <button className="primary-full-button" onClick={saveProfileChanges}>
+          שמור שינויים
+        </button>
+      </div>
+    </section>
+  );
 
   if (screen === "auth") {
     return (
-      <div dir="rtl" style={authWrapper}>
-        <div style={{ maxWidth: "470px", width: "100%" }}>
+      <div className="auth-page" dir="rtl">
+        <div className="auth-card">
+          <div className="brand-mini">תפריט יומי מומלץ</div>
+
           {authMode === "login" ? (
-            <div style={authCard}>
-              <div
-                style={{
-                  display: "inline-block",
-                  marginBottom: "14px",
-                  padding: "8px 14px",
-                  borderRadius: "999px",
-                  background: "#ecfeff",
-                  color: "#0f766e",
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  border: "1px solid #a5f3fc",
-                }}
-              >
-                IBD Nutrition Assistant
-              </div>
-
-              <h1
-                style={{
-                  marginTop: 0,
-                  marginBottom: "8px",
-                  fontSize: "34px",
-                  color: "#0f172a",
-                }}
-              >
-                התחברות
-              </h1>
-
-              <p
-                style={{
-                  marginTop: 0,
-                  marginBottom: "20px",
-                  color: "#64748b",
-                  fontSize: "15px",
-                  lineHeight: "1.6",
-                }}
-              >
-                היכנס עם שם המשתמש והסיסמה שלך כדי לקבל תפריט יומי, מתכונים
-                ומעקב אישי.
+            <>
+              <h1 className="auth-title">התחברות</h1>
+              <p className="auth-subtitle">
+                היכנס עם שם המשתמש והסיסמה שלך כדי לראות תפריט מותאם אישית.
               </p>
 
               <input
@@ -847,7 +1091,7 @@ export default function App() {
                 onChange={(e) =>
                   setLoginData({ ...loginData, username: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
               <input
@@ -857,32 +1101,17 @@ export default function App() {
                 onChange={(e) =>
                   setLoginData({ ...loginData, password: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
-              {authError && (
-                <div
-                  style={{
-                    marginTop: "12px",
-                    color: "#dc2626",
-                    fontSize: "14px",
-                    backgroundColor: "#fef2f2",
-                    padding: "12px",
-                    borderRadius: "14px",
-                    border: "1px solid #fecaca",
-                    fontWeight: "600",
-                  }}
-                >
-                  {authError}
-                </div>
-              )}
+              {authError && <div className="auth-error">{authError}</div>}
 
-              <button style={mainButton} onClick={loginUser}>
+              <button className="primary-full-button" onClick={loginUser}>
                 התחבר
               </button>
 
               <button
-                style={secondaryButton}
+                className="secondary-full-button"
                 onClick={() => {
                   setAuthError("");
                   setAuthMode("register");
@@ -890,47 +1119,12 @@ export default function App() {
               >
                 אין לי משתמש עדיין
               </button>
-            </div>
+            </>
           ) : (
-            <div style={authCard}>
-              <div
-                style={{
-                  display: "inline-block",
-                  marginBottom: "14px",
-                  padding: "8px 14px",
-                  borderRadius: "999px",
-                  background: "#ecfeff",
-                  color: "#0f766e",
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  border: "1px solid #a5f3fc",
-                }}
-              >
-                פתיחת משתמש חדש
-              </div>
-
-              <h1
-                style={{
-                  marginTop: 0,
-                  marginBottom: "8px",
-                  fontSize: "34px",
-                  color: "#0f172a",
-                }}
-              >
-                הרשמה
-              </h1>
-
-              <p
-                style={{
-                  marginTop: 0,
-                  marginBottom: "20px",
-                  color: "#64748b",
-                  fontSize: "15px",
-                  lineHeight: "1.6",
-                }}
-              >
-                צור פרופיל אישי, הזן הנחיות תזונה, והמערכת תבנה לך המלצות
-                מתאימות יותר.
+            <>
+              <h1 className="auth-title">הרשמה</h1>
+              <p className="auth-subtitle">
+                צור פרופיל אישי והמערכת תתאים לך תפריט ומתכונים.
               </p>
 
               <input
@@ -939,7 +1133,7 @@ export default function App() {
                 onChange={(e) =>
                   setRegisterData({ ...registerData, fullName: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
               <input
@@ -948,7 +1142,7 @@ export default function App() {
                 onChange={(e) =>
                   setRegisterData({ ...registerData, age: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
               <input
@@ -957,7 +1151,7 @@ export default function App() {
                 onChange={(e) =>
                   setRegisterData({ ...registerData, username: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
               <input
@@ -967,7 +1161,7 @@ export default function App() {
                 onChange={(e) =>
                   setRegisterData({ ...registerData, password: e.target.value })
                 }
-                style={inputStyle}
+                className="text-input"
               />
 
               <select
@@ -978,7 +1172,7 @@ export default function App() {
                     diseaseType: e.target.value,
                   })
                 }
-                style={inputStyle}
+                className="text-input"
               >
                 <option>קרוהן</option>
                 <option>קוליטיס</option>
@@ -992,7 +1186,7 @@ export default function App() {
                     currentStatus: e.target.value,
                   })
                 }
-                style={inputStyle}
+                className="text-input"
               >
                 <option>רמיסיה</option>
                 <option>רגיש</option>
@@ -1005,7 +1199,7 @@ export default function App() {
                 onChange={(e) =>
                   setRegisterData({ ...registerData, safeFoods: e.target.value })
                 }
-                style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
+                className="text-input text-area"
               />
 
               <textarea
@@ -1017,11 +1211,11 @@ export default function App() {
                     triggerFoods: e.target.value,
                   })
                 }
-                style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
+                className="text-input text-area"
               />
 
               <textarea
-                placeholder="הדבק כאן את תקציר התזונאית. לדוגמה: מומלץ לאכול אורז, עוף, בננה ותפוח אדמה. אסור לאכול מטוגן, חריף ומוצרי חלב."
+                placeholder="הדבק כאן את תקציר התזונאית"
                 value={registerData.nutritionText}
                 onChange={(e) =>
                   setRegisterData({
@@ -1029,92 +1223,53 @@ export default function App() {
                     nutritionText: e.target.value,
                   })
                 }
-                style={{ ...inputStyle, minHeight: "140px", resize: "vertical" }}
+                className="text-input text-area large"
               />
 
               {registerData.nutritionText && (
-                <div style={{ marginBottom: "12px" }}>
-                  <button
-                    style={secondaryButton}
-                    onClick={() => {
-                      const parsed = parseNutritionText(registerData.nutritionText);
-                      setRegisterData((prev) => ({
-                        ...prev,
-                        allowedFoods: parsed.allowed,
-                        forbiddenFoods: parsed.forbidden,
-                      }));
-                    }}
-                  >
-                    נתח את התקציר
-                  </button>
-                </div>
+                <button
+                  className="secondary-full-button"
+                  onClick={() => {
+                    const parsed = parseNutritionText(registerData.nutritionText);
+                    setRegisterData((prev) => ({
+                      ...prev,
+                      allowedFoods: parsed.allowed,
+                      forbiddenFoods: parsed.forbidden,
+                    }));
+                  }}
+                >
+                  נתח את התקציר
+                </button>
               )}
 
               {registerData.allowedFoods.length > 0 && (
-                <div style={{ marginBottom: "12px" }}>
-                  <div
-                    style={{
-                      fontWeight: "800",
-                      marginBottom: "8px",
-                      color: "#0f172a",
-                    }}
-                  >
-                    מאכלים מותרים:
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {registerData.allowedFoods.map((food, index) => (
-                      <span key={index} style={chipAllowed}>
-                        {food}
-                      </span>
-                    ))}
-                  </div>
+                <div className="chips-wrap">
+                  {registerData.allowedFoods.map((food, index) => (
+                    <span className="chip allowed" key={`allowed-${index}`}>
+                      {food}
+                    </span>
+                  ))}
                 </div>
               )}
 
               {registerData.forbiddenFoods.length > 0 && (
-                <div style={{ marginBottom: "12px" }}>
-                  <div
-                    style={{
-                      fontWeight: "800",
-                      marginBottom: "8px",
-                      color: "#0f172a",
-                    }}
-                  >
-                    מאכלים אסורים:
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {registerData.forbiddenFoods.map((food, index) => (
-                      <span key={index} style={chipForbidden}>
-                        {food}
-                      </span>
-                    ))}
-                  </div>
+                <div className="chips-wrap">
+                  {registerData.forbiddenFoods.map((food, index) => (
+                    <span className="chip forbidden" key={`forbidden-${index}`}>
+                      {food}
+                    </span>
+                  ))}
                 </div>
               )}
 
-              {authError && (
-                <div
-                  style={{
-                    marginTop: "12px",
-                    color: "#dc2626",
-                    fontSize: "14px",
-                    backgroundColor: "#fef2f2",
-                    padding: "12px",
-                    borderRadius: "14px",
-                    border: "1px solid #fecaca",
-                    fontWeight: "600",
-                  }}
-                >
-                  {authError}
-                </div>
-              )}
+              {authError && <div className="auth-error">{authError}</div>}
 
-              <button style={mainButton} onClick={registerUser}>
+              <button className="primary-full-button" onClick={registerUser}>
                 צור משתמש
               </button>
 
               <button
-                style={secondaryButton}
+                className="secondary-full-button"
                 onClick={() => {
                   setAuthError("");
                   setAuthMode("login");
@@ -1122,7 +1277,7 @@ export default function App() {
               >
                 כבר יש לי משתמש
               </button>
-            </div>
+            </>
           )}
         </div>
       </div>
@@ -1130,546 +1285,101 @@ export default function App() {
   }
 
   return (
-    <div dir="rtl" style={appWrapper}>
-      <div style={pageContainer}>
-        {screen === "home" && currentUser && (
-          <>
-            <div
-              style={{
-                background: "linear-gradient(135deg, #0284c7, #14b8a6)",
-                color: "white",
-                borderRadius: "28px",
-                padding: "24px",
-                boxShadow: "0 18px 38px rgba(2,132,199,0.18)",
-                marginBottom: "18px",
+    <div className="app-shell" dir="rtl">
+      <aside className="sidebar">
+        <div className="sidebar-brand">
+          <div className="sidebar-brand-icon">✚</div>
+          <div>
+            <div className="sidebar-brand-title">תפריט יומי מומלץ</div>
+            <div className="sidebar-brand-subtitle">תפריט מותאם אישית עבורך</div>
+          </div>
+        </div>
+
+        <div className="profile-card">
+          <div className="avatar-circle">👤</div>
+          <div className="profile-label">שלום!</div>
+          <div className="profile-name">{currentUser?.fullName}</div>
+          <div className="profile-meta">גיל: {currentUser?.age || "-"}</div>
+          <div className="profile-status">
+            סטטוס: <span>{currentUser?.currentStatus}</span>
+          </div>
+        </div>
+
+        <nav className="sidebar-nav">
+          {menuItems.map((item) => (
+            <button
+              key={item.key}
+              className={`sidebar-nav-item ${activeTab === item.key ? "active" : ""}`}
+              onClick={() => {
+                if (item.key === "addMeal") {
+                  setScreen("home");
+                  setActiveTab("addMeal");
+                } else if (item.key === "profile") {
+                  setScreen("home");
+                  setActiveTab("profile");
+                } else {
+                  setScreen("home");
+                  setActiveTab(item.key);
+                }
               }}
             >
-              <div
-                style={{
-                  display: "inline-block",
-                  marginBottom: "10px",
-                  padding: "7px 12px",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.18)",
-                  fontSize: "12px",
-                  fontWeight: "700",
-                }}
-              >
-                תזונה מותאמת אישית
-              </div>
-
-              <div style={{ fontSize: "14px", opacity: 0.95, marginBottom: "8px" }}>
-                שלום {currentUser.fullName}
-              </div>
-
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: "32px",
-                  lineHeight: "1.15",
-                  fontWeight: "800",
-                }}
-              >
-                מה בטוח לי לאכול היום?
-              </h1>
-
-              <div style={{ marginTop: "14px", fontSize: "15px" }}>
-                מצב נוכחי: <strong>{currentUser.currentStatus}</strong>
-              </div>
-
-              <div style={{ marginTop: "6px", fontSize: "15px" }}>
-                אבחנה: <strong>{currentUser.diseaseType}</strong>
-              </div>
-            </div>
-
-            <div style={cardStyle}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "8px",
-                  fontSize: "23px",
-                  color: "#0f172a",
-                }}
-              >
-                תפריט יומי מומלץ
-              </h3>
-
-              <p
-                style={{
-                  marginTop: 0,
-                  marginBottom: "16px",
-                  color: "#64748b",
-                  fontSize: "14px",
-                  lineHeight: "1.6",
-                }}
-              >
-                בנוי רק מתוך המאכלים שהמערכת זיהתה כמתאימים לך ובהתאם למצב
-                הנוכחי שלך.
-              </p>
-
-              {dailyMenu.length > 0 ? (
-                <div style={{ display: "grid", gap: "12px" }}>
-                  {dailyMenu.map((item, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        background: "linear-gradient(180deg, #f8fdff, #f0fdfa)",
-                        border: "1px solid #bae6fd",
-                        borderRadius: "18px",
-                        padding: "16px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: "800",
-                          color: "#0369a1",
-                          marginBottom: "6px",
-                        }}
-                      >
-                        {item.title}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: "19px",
-                          fontWeight: "800",
-                          color: "#0f172a",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        {item.recipe.name}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          color: "#475569",
-                          marginBottom: "8px",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        {item.recipe.description}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          color: "#0f766e",
-                          fontWeight: "700",
-                          marginBottom: "12px",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        רכיבים: {(item.recipe.fullIngredients || item.recipe.ingredients).join(", ")}
-                      </div>
-
-                      <button
-                        onClick={() => addSuggestedMealToToday(item.recipe)}
-                        style={{
-                          background: "linear-gradient(135deg, #0284c7, #14b8a6)",
-                          color: "white",
-                          border: "none",
-                          padding: "11px 15px",
-                          borderRadius: "12px",
-                          cursor: "pointer",
-                          fontSize: "14px",
-                          fontWeight: "800",
-                        }}
-                      >
-                        אכלתי את זה
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ color: "#64748b", margin: 0, lineHeight: "1.6" }}>
-                  עדיין אין מספיק מאכלים מותרים כדי לייצר תפריט איכותי.
-                </p>
-              )}
-
-              <button style={mainButton} onClick={generateDailyMenu}>
-                תן לי תפריט חדש
-              </button>
-            </div>
-
-            <div style={cardStyle}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "8px",
-                  fontSize: "23px",
-                  color: "#0f172a",
-                }}
-              >
-                מנות שמתאימות לך
-              </h3>
-
-              <p
-                style={{
-                  marginTop: 0,
-                  marginBottom: "16px",
-                  color: "#64748b",
-                  fontSize: "14px",
-                  lineHeight: "1.6",
-                }}
-              >
-                כאן תראה מנות יותר מלאות ורלוונטיות, לא רק שילובים קטנים.
-              </p>
-
-              {filteredRecipes.length > 0 ? (
-                <div style={{ display: "grid", gap: "12px" }}>
-                  {filteredRecipes.map((recipe, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        background: "white",
-                        border: "1px solid #e2e8f0",
-                        borderRadius: "18px",
-                        padding: "16px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "18px",
-                          fontWeight: "800",
-                          color: "#0f172a",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        {recipe.name}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          color: "#475569",
-                          marginBottom: "8px",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        {recipe.description}
-                      </div>
-
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          color: "#0f766e",
-                          fontWeight: "700",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        רכיבים מלאים: {(recipe.fullIngredients || recipe.ingredients).join(", ")}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ color: "#64748b", margin: 0 }}>
-                  עדיין אין מספיק מאכלים מותרים כדי להציע מנות.
-                </p>
-              )}
-            </div>
-
-            <div style={cardStyle}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "14px",
-                  fontSize: "22px",
-                  color: "#0f172a",
-                }}
-              >
-                מאכלים מותרים שזוהו
-              </h3>
-
-              {currentUser.allowedFoods && currentUser.allowedFoods.length > 0 ? (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                  {currentUser.allowedFoods.map((food, index) => (
-                    <span key={index} style={chipAllowed}>
-                      {food}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p style={{ color: "#64748b", margin: 0 }}>
-                  עדיין לא זוהו מאכלים מותרים.
-                </p>
-              )}
-            </div>
-
-            <div style={cardStyle}>
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "14px",
-                  fontSize: "22px",
-                  color: "#0f172a",
-                }}
-              >
-                מה אכלתי היום
-              </h3>
-
-              {meals.length === 0 ? (
-                <p style={{ color: "#64748b", margin: 0 }}>
-                  עדיין לא הוספת ארוחות.
-                </p>
-              ) : (
-                <div style={{ display: "grid", gap: "10px" }}>
-                  {meals.map((meal, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        border: "1px solid #e5e7eb",
-                        borderRadius: "16px",
-                        padding: "14px",
-                        background: "#ffffff",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "17px",
-                          fontWeight: "800",
-                          color: "#0f172a",
-                        }}
-                      >
-                        {meal.name}
-                      </div>
-
-                      <div
-                        style={{
-                          marginTop: "8px",
-                          fontSize: "14px",
-                          fontWeight: "700",
-                          color: getFeelingColor(meal.feeling),
-                          marginBottom: "10px",
-                        }}
-                      >
-                        הרגשתי אחרי זה: {meal.feeling}
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "8px",
-                          flexWrap: "wrap",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        <button
-                          style={smallFeelingButtonStyle("טוב", meal.feeling)}
-                          onClick={() => updateMealFeeling(index, "טוב")}
-                        >
-                          טוב
-                        </button>
-                        <button
-                          style={smallFeelingButtonStyle("סביר", meal.feeling)}
-                          onClick={() => updateMealFeeling(index, "סביר")}
-                        >
-                          סביר
-                        </button>
-                        <button
-                          style={smallFeelingButtonStyle("לא טוב", meal.feeling)}
-                          onClick={() => updateMealFeeling(index, "לא טוב")}
-                        >
-                          לא טוב
-                        </button>
-                      </div>
-
-                      <button
-                        onClick={() => deleteMeal(index)}
-                        style={{
-                          backgroundColor: "#fee2e2",
-                          color: "#dc2626",
-                          border: "none",
-                          padding: "8px 12px",
-                          borderRadius: "10px",
-                          cursor: "pointer",
-                          fontSize: "14px",
-                          fontWeight: "700",
-                        }}
-                      >
-                        מחק
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <button style={mainButton} onClick={() => setScreen("addMeal")}>
-                הוספת ארוחה
-              </button>
-            </div>
-
-            <button style={secondaryButton} onClick={() => setScreen("profile")}>
-              עריכת פרופיל
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
             </button>
+          ))}
+        </nav>
 
-            <button style={secondaryButton} onClick={logoutUser}>
+        <div className="side-info-card medical">
+          <div className="side-info-title">סטטוס רפואי</div>
+          <div className="side-info-row">
+            <strong>מחלה:</strong> {currentUser?.diseaseType}
+          </div>
+          <div className="side-info-row">
+            <strong>סטטוס:</strong> {currentUser?.currentStatus}
+          </div>
+          <div className="side-info-note">
+            המערכת מתאימה עבורך מתכונים מגוונים ועשירים.
+          </div>
+        </div>
+
+        <div className="side-count-card allowed-card">
+          <span>מאכלים מותרים</span>
+          <strong>{allowedCount}</strong>
+        </div>
+
+        <div className="side-count-card forbidden-card">
+          <span>מאכלים אסורים</span>
+          <strong>{forbiddenCount}</strong>
+        </div>
+
+        <div className="side-tip-card">
+          <div className="side-tip-title">טיפ יומי ✨</div>
+          <p>שמירה על מגוון עוזרת לייצר תפריט יותר נעים ומאוזן לאורך זמן.</p>
+        </div>
+      </aside>
+
+      <main className="main-content">
+        <header className="topbar">
+          <div className="topbar-left">
+            <button className="topbar-btn" onClick={logoutUser}>
               התנתק
             </button>
-          </>
-        )}
+          </div>
 
-        {screen === "addMeal" && (
-          <div style={cardStyle}>
-            <h1
-              style={{
-                marginTop: 0,
-                fontSize: "30px",
-                color: "#0f172a",
-                marginBottom: "10px",
-              }}
-            >
-              הוספת ארוחה
-            </h1>
-
-            <p
-              style={{
-                color: "#64748b",
-                marginBottom: "14px",
-                lineHeight: "1.6",
-              }}
-            >
-              כתוב מה אכלת ואיך הרגשת אחריה.
-            </p>
-
-            <input
-              placeholder="מה אכלת?"
-              value={mealInput}
-              onChange={(e) => setMealInput(e.target.value)}
-              style={inputStyle}
-            />
-
-            <h3
-              style={{
-                marginTop: 0,
-                marginBottom: "12px",
-                fontSize: "20px",
-                color: "#0f172a",
-              }}
-            >
-              איך הרגשת אחרי האוכל?
-            </h3>
-
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                flexWrap: "wrap",
-                marginBottom: "8px",
-              }}
-            >
-              <button
-                style={feelingButtonStyle("טוב", mealFeeling)}
-                onClick={() => setMealFeeling("טוב")}
-              >
-                טוב
-              </button>
-              <button
-                style={feelingButtonStyle("סביר", mealFeeling)}
-                onClick={() => setMealFeeling("סביר")}
-              >
-                סביר
-              </button>
-              <button
-                style={feelingButtonStyle("לא טוב", mealFeeling)}
-                onClick={() => setMealFeeling("לא טוב")}
-              >
-                לא טוב
-              </button>
+          <div className="topbar-right">
+            <div className="topbar-brand">
+              <div className="topbar-title">תפריט יומי מומלץ</div>
+              <div className="topbar-subtitle">תפריט מותאם אישית עבורך</div>
             </div>
-
-            <button style={mainButton} onClick={saveMeal}>
-              שמור ארוחה
-            </button>
-
-            <button style={secondaryButton} onClick={() => setScreen("home")}>
-              חזור
-            </button>
+            <div className="topbar-plus">✚</div>
           </div>
-        )}
+        </header>
 
-        {screen === "profile" && currentUser && (
-          <div style={cardStyle}>
-            <h1
-              style={{
-                marginTop: 0,
-                fontSize: "30px",
-                color: "#0f172a",
-                marginBottom: "10px",
-              }}
-            >
-              עריכת פרופיל
-            </h1>
-
-            <input
-              placeholder="שם מלא"
-              value={currentUser.fullName}
-              onChange={(e) => updateCurrentUserField("fullName", e.target.value)}
-              style={inputStyle}
-            />
-
-            <input
-              placeholder="גיל"
-              value={currentUser.age}
-              onChange={(e) => updateCurrentUserField("age", e.target.value)}
-              style={inputStyle}
-            />
-
-            <select
-              value={currentUser.currentStatus}
-              onChange={(e) =>
-                updateCurrentUserField("currentStatus", e.target.value)
-              }
-              style={inputStyle}
-            >
-              <option>רמיסיה</option>
-              <option>רגיש</option>
-              <option>התלקחות</option>
-            </select>
-
-            <textarea
-              placeholder="מאכלים שבטוחים לי"
-              value={currentUser.safeFoods}
-              onChange={(e) =>
-                updateCurrentUserField("safeFoods", e.target.value)
-              }
-              style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
-            />
-
-            <textarea
-              placeholder="מאכלים שעושים לי לא טוב"
-              value={currentUser.triggerFoods}
-              onChange={(e) =>
-                updateCurrentUserField("triggerFoods", e.target.value)
-              }
-              style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
-            />
-
-            <textarea
-              placeholder="הדבק כאן את תקציר התזונאית"
-              value={currentUser.nutritionText || ""}
-              onChange={(e) =>
-                updateCurrentUserField("nutritionText", e.target.value)
-              }
-              style={{ ...inputStyle, minHeight: "140px", resize: "vertical" }}
-            />
-
-            <button style={secondaryButton} onClick={saveProfileChanges}>
-              נתח מחדש את התקציר
-            </button>
-
-            <button style={mainButton} onClick={saveProfileChanges}>
-              שמור שינויים
-            </button>
-
-            <button style={secondaryButton} onClick={() => setScreen("home")}>
-              חזור
-            </button>
-          </div>
-        )}
-      </div>
+        {activeTab === "home" && renderHomeDashboard()}
+        {activeTab === "recipes" && renderAllRecipes()}
+        {activeTab === "addMeal" && renderMeals()}
+        {activeTab === "profile" && renderProfile()}
+      </main>
     </div>
   );
 }
