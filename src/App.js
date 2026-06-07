@@ -1803,29 +1803,38 @@ const loginUser = async () => {
   setMealFeeling("");
 };
   const addSuggestedMealToToday = async (recipe) => {
-    const alreadyExists = meals.some((meal) => meal.name === recipe.name);
-    if (alreadyExists) return;
+  const alreadyExists = meals.some((meal) => meal.name === recipe.name);
+  if (alreadyExists) return;
 
-    const newMeal = {
-      name: recipe.name,
-      feeling: "עוד לא סימנתי",
-      date: new Date().toISOString(),
-    };
-    const { data: userData } = await supabase.auth.getUser();
+  const { data: userData } = await supabase.auth.getUser();
 
-await supabase
-  .from("study_sessions")
-  .insert([
-    {
-      user_id: userData.user.id,
-      subject: recipe.name,
-      duration_minutes: 30,
-      notes: "עוד לא סימנתי",
-    },
-  ]);
+  const { data, error } = await supabase
+    .from("study_sessions")
+    .insert([
+      {
+        user_id: userData.user.id,
+        subject: recipe.name,
+        duration_minutes: 30,
+        notes: "עוד לא סימנתי",
+      },
+    ])
+    .select()
+    .single();
 
-    setMeals((prev) => [newMeal, ...prev]);
+  if (error) {
+    console.log("Add suggested meal error:", error);
+    return;
+  }
+
+  const newMeal = {
+    id: data.id,
+    name: data.subject,
+    feeling: data.notes,
+    date: data.created_at,
   };
+
+  setMeals((prev) => [newMeal, ...prev]);
+};
 
   const updateMealFeeling = async (indexToUpdate, newFeeling) => {
   const mealToUpdate = meals[indexToUpdate];
