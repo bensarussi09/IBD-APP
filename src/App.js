@@ -2049,7 +2049,7 @@ await supabase
       key={`${recipe.name}-${index}`}
     >
       <div className="recipe-image-wrap">
-        <img {...recipeImageProps(recipe)} />
+        <img alt=""{...recipeImageProps(recipe)} />
         <button
           className={`favorite-button ${favorites.includes(recipe.name) ? "active" : ""}`}
           onClick={() => toggleFavorite(recipe.name)}
@@ -2648,7 +2648,7 @@ await supabase
           </button>
 
           <div className="recipe-modal-image-wrap">
-            <img {...recipeImageProps(selectedRecipe)} />
+            <img alt=""{...recipeImageProps(selectedRecipe)} />
           </div>
 
           <div className="recipe-modal-content">
