@@ -1,3 +1,4 @@
+import Clarity from "@microsoft/clarity";
 import React, { useEffect, useMemo, useState } from "react";
 import { supabase } from "./supabaseClient";
 import "./App.css";
@@ -1122,6 +1123,11 @@ const emptyInsights = {
 };
 
 export default function App() {
+  useEffect(() => {
+  if (process.env.NODE_ENV === "production") {
+    Clarity.init("x7jgq1blzs");
+  }
+}, []);
   const [screen, setScreen] = useState("auth");
   const [authMode, setAuthMode] = useState("login");
   const [activeTab, setActiveTab] = useState("home");
@@ -1802,7 +1808,7 @@ const loginUser = async () => {
   setMealInput("");
   setMealFeeling("");
 };
-  const addSuggestedMealToToday = async (recipe) => {
+const addSuggestedMealToToday = async (recipe) => {
   const alreadyExists = meals.some((meal) => meal.name === recipe.name);
   if (alreadyExists) return;
 
@@ -1835,6 +1841,7 @@ const loginUser = async () => {
 
   setMeals((prev) => [newMeal, ...prev]);
 };
+  
 
   const updateMealFeeling = async (indexToUpdate, newFeeling) => {
   const mealToUpdate = meals[indexToUpdate];
