@@ -1156,6 +1156,11 @@ export default function App() {
   const [botFreeText, setBotFreeText] = useState("");
   const [botMessages, setBotMessages] = useState([]);
 
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+const [feedbackMessage, setFeedbackMessage] = useState("");
+const [feedbackType, setFeedbackType] = useState("Suggestion");
+const [feedbackSent, setFeedbackSent] = useState(false);
+
   const getUsers = () => {
     const users = localStorage.getItem("users");
     return users ? JSON.parse(users) : [];
@@ -1164,7 +1169,33 @@ export default function App() {
   const saveUsers = (users) => {
     localStorage.setItem("users", JSON.stringify(users));
   };
+const submitFeedback = async () => {
+  if (!feedbackMessage.trim()) return;
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return;
+
+  const { error } = await supabase
+    .from("feedback")
+    .insert([
+      {
+        user_id: user.id,
+        message: feedbackMessage,
+        type: feedbackType,
+      },
+    ]);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  setFeedbackSent(true);
+  setFeedbackMessage("");
+};
    const loadUserMeals = async () => {
   const { data: userData } = await supabase.auth.getUser();
 
@@ -3087,6 +3118,70 @@ const addSuggestedMealToToday = async (recipe) => {
 
       {renderRecipeModal()}
       {renderBotWidget()}
+      {feedbackOpen && (
+  <div
+    style={{
+      position: "fixed",
+      bottom: "90px",
+      right: "20px",
+      background: "#fff",
+      padding: "20px",
+      borderRadius: "12px",
+      boxShadow: "0 0 20px rgba(0,0,0,0.2)",
+      zIndex: 9999,
+      width: "320px",
+    }}
+  >
+    <h3>Feedback</h3>
+
+    <select
+      value={feedbackType}
+      onChange={(e) => setFeedbackType(e.target.value)}
+      style={{ width: "100%", marginBottom: "10px" }}
+    >
+      <option>Suggestion</option>
+      <option>Bug</option>
+      <option>Question</option>
+    </select>
+
+    <textarea
+      value={feedbackMessage}
+      onChange={(e) => setFeedbackMessage(e.target.value)}
+      placeholder="Tell us what you think..."
+      style={{
+        width: "100%",
+        height: "100px",
+        marginBottom: "10px",
+      }}
+    />
+
+    <button onClick={submitFeedback}>
+      Send
+    </button>
+
+    <button
+      onClick={() => setFeedbackOpen(false)}
+      style={{ marginLeft: "10px" }}
+    >
+      Close
+    </button>
+  </div>
+)}
+
+<button
+  onClick={() => setFeedbackOpen(true)}
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    zIndex: 9999,
+    padding: "12px 18px",
+    borderRadius: "30px",
+    cursor: "pointer",
+  }}
+>
+  Feedback
+</button>
     </>
   );
 }
