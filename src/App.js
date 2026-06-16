@@ -1049,6 +1049,201 @@ const recipeLibrary = [
     prepTime: "25 דק'",
     image: "",
   },
+  ,
+{
+  name: "אורז לבן עם הודו טחון",
+  ingredients: ["אורז", "הודו"],
+  fullIngredients: ["כוס אורז לבן", "150 גרם הודו טחון"],
+  description: "ארוחה עשירה בחלבון וקלה לעיכול.",
+  mealType: "צהריים",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "חלבון גבוה",
+  prepTime: "20 דק",
+  image: ""
+},
+
+{
+  name: "פילה מושט אפוי",
+  ingredients: ["מושט", "שמן זית"],
+  fullIngredients: ["פילה מושט", "כפית שמן זית"],
+  description: "דג עדין המתאים לרוב חולי הקרוהן.",
+  mealType: "צהריים",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "דג",
+  prepTime: "20 דק",
+  image: ""
+},
+
+{
+  name: "ביצה קשה עם טוסט לבן",
+  ingredients: ["ביצה", "טוסט"],
+  fullIngredients: ["2 ביצים קשות", "2 פרוסות לחם לבן"],
+  description: "פתרון מהיר וקל לעיכול.",
+  mealType: "בוקר",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "מהיר",
+  prepTime: "10 דק",
+  image: ""
+},
+
+{
+  name: "פסטה לבנה עם עוף",
+  ingredients: ["פסטה", "עוף"],
+  fullIngredients: ["פסטה לבנה", "150 גרם חזה עוף"],
+  description: "פחמימה קלה בשילוב חלבון איכותי.",
+  mealType: "צהריים",
+  safeLevel: 4,
+  isSoup: false,
+  tag: "אנרגיה",
+  prepTime: "25 דק",
+  image: ""
+},
+
+{
+  name: "מרק גזר קטיפתי",
+  ingredients: ["גזר"],
+  fullIngredients: ["3 גזרים קלופים", "מים", "מעט מלח"],
+  description: "מרק עדין ונעים למערכת העיכול.",
+  mealType: "ערב",
+  safeLevel: 5,
+  isSoup: true,
+  tag: "מרק",
+  prepTime: "30 דק",
+  image: ""
+},
+
+{
+  name: "פירה בטטה",
+  ingredients: ["בטטה"],
+  fullIngredients: ["2 בטטות קלופות"],
+  description: "עשיר בפחמימות ונוח לעיכול.",
+  mealType: "ערב",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "רך",
+  prepTime: "25 דק",
+  image: ""
+},
+
+{
+  name: "שייק בננה וחלב שקדים",
+  ingredients: ["בננה", "חלב שקדים"],
+  fullIngredients: ["בננה בשלה", "כוס חלב שקדים"],
+  description: "שייק קליל ומתאים לחוסר תיאבון.",
+  mealType: "נשנוש",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "שייק",
+  prepTime: "3 דק",
+  image: ""
+},
+
+{
+  name: "יוגורט יווני עדין",
+  ingredients: ["יוגורט"],
+  fullIngredients: ["גביע יוגורט יווני"],
+  description: "מקור טוב לחלבון ופרוביוטיקה.",
+  mealType: "נשנוש",
+  safeLevel: 4,
+  isSoup: false,
+  tag: "חלבון",
+  prepTime: "1 דק",
+  image: ""
+},
+
+{
+  name: "אורז עם סלמון",
+  ingredients: ["אורז", "סלמון"],
+  fullIngredients: ["כוס אורז לבן", "150 גרם סלמון"],
+  description: "ארוחה מאוזנת ועשירה באומגה 3.",
+  mealType: "צהריים",
+  safeLevel: 4,
+  isSoup: false,
+  tag: "אומגה 3",
+  prepTime: "25 דק",
+  image: ""
+},
+
+{
+  name: "חזה עוף בתנור",
+  ingredients: ["עוף"],
+  fullIngredients: ["200 גרם חזה עוף"],
+  description: "מקור חלבון איכותי ודל שומן.",
+  mealType: "צהריים",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "חלבון",
+  prepTime: "25 דק",
+  image: ""
+},
+
+{
+  name: "טוסט עם גבינה לבנה",
+  ingredients: ["טוסט", "גבינה"],
+  fullIngredients: ["2 פרוסות טוסט", "גבינה לבנה 5%"],
+  description: "ארוחת ערב קלה ופשוטה.",
+  mealType: "ערב",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "קל",
+  prepTime: "5 דק",
+  image: ""
+},
+
+{
+  name: "מרק עוף ואורז",
+  ingredients: ["עוף", "אורז"],
+  fullIngredients: ["מרק עוף צח", "חצי כוס אורז"],
+  description: "מתאים במיוחד בתקופות רגישות.",
+  mealType: "ערב",
+  safeLevel: 5,
+  isSoup: true,
+  tag: "התלקחות",
+  prepTime: "35 דק",
+  image: ""
+},
+
+{
+  name: "בננה עם חמאת בוטנים",
+  ingredients: ["בננה", "חמאת בוטנים"],
+  fullIngredients: ["בננה בשלה", "כפית חמאת בוטנים"],
+  description: "נשנוש עשיר בקלוריות.",
+  mealType: "נשנוש",
+  safeLevel: 4,
+  isSoup: false,
+  tag: "עלייה במשקל",
+  prepTime: "2 דק",
+  image: ""
+},
+
+{
+  name: "אטריות עם עוף",
+  ingredients: ["אטריות", "עוף"],
+  fullIngredients: ["אטריות ביצים", "150 גרם עוף"],
+  description: "ארוחה עדינה ופופולרית.",
+  mealType: "צהריים",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "קל לעיכול",
+  prepTime: "20 דק",
+  image: ""
+},
+
+{
+  name: "דייסת סולת",
+  ingredients: ["סולת"],
+  fullIngredients: ["חצי כוס סולת", "חלב שקדים"],
+  description: "פתרון מצוין לארוחת בוקר רכה.",
+  mealType: "בוקר",
+  safeLevel: 5,
+  isSoup: false,
+  tag: "רך",
+  prepTime: "10 דק",
+  image: ""
+}
 ];
 
 const menuItems = [
