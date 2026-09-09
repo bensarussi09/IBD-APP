@@ -1391,19 +1391,20 @@ const submitFeedback = async () => {
   setFeedbackSent(true);
   setFeedbackMessage("");
 };
+
    const loadUserMeals = async () => {
   const { data: userData } = await supabase.auth.getUser();
 
-  if (!userData.user) {
+  if (!userData?.user) {
     setMeals([]);
     return;
   }
 
   const { data, error } = await supabase
-    .from("study_sessions")
+    .from("meals")
     .select("*")
     .eq("user_id", userData.user.id)
-    .order("created_at", { ascending: false });
+    .order("eaten_at", { ascending: false });
 
   if (error) {
     console.log("Load meals error:", error);
@@ -1412,11 +1413,12 @@ const submitFeedback = async () => {
   }
 
   const loadedMeals = data.map((item) => ({
-  id: item.id,
-  name: item.subject,
-  feeling: item.notes,
-  date: item.created_at,
-}));
+    id: item.id,
+    name: item.name,
+    feeling: item.feeling,
+    date: item.eaten_at,
+  }));
+
   setMeals(loadedMeals);
 };
 
@@ -1458,11 +1460,7 @@ const submitFeedback = async () => {
     loadWeeklyPlan(foundUser.username);
   }, []);
 
-  useEffect(() => {
-    if (!currentUser) return;
-    localStorage.setItem(`meals_${currentUser.username}`, JSON.stringify(meals));
-  }, [meals, currentUser]);
-
+  
   useEffect(() => {
     if (!currentUser) return;
     localStorage.setItem(`favorites_${currentUser.username}`, JSON.stringify(favorites));
@@ -1595,7 +1593,6 @@ const submitFeedback = async () => {
   }
   const profileData = {
   username: registerData.username.trim(),
-  password: registerData.password.trim(),
   full_name: registerData.fullName.trim(),
   safe_foods: registerData.safeFoods,
   trigger_foods: registerData.triggerFoods,
@@ -2000,19 +1997,19 @@ const loginUser = async () => {
     updateTasteInsights(recipe, rating);
   };
 
+
   const saveMeal = async () => {
   if (!mealInput.trim() || !mealFeeling) return;
 
   const { data: userData } = await supabase.auth.getUser();
 
   const { data, error } = await supabase
-    .from("study_sessions")
+    .from("meals")
     .insert([
       {
         user_id: userData.user.id,
-        subject: mealInput.trim(),
-        duration_minutes: 30,
-        notes: mealFeeling,
+        name: mealInput.trim(),
+        feeling: mealFeeling,
       },
     ])
     .select()
@@ -2025,57 +2022,66 @@ const loginUser = async () => {
 
   const newMeal = {
     id: data.id,
-    name: data.subject,
-    feeling: data.notes,
-    date: data.created_at,
+    name: data.name,
+    feeling: data.feeling,
+    date: data.eaten_at,
   };
 
   setMeals((prev) => [newMeal, ...prev]);
   setMealInput("");
   setMealFeeling("");
 };
+
 const addSuggestedMealToToday = async (recipe) => {
   const alreadyExists = meals.some((meal) => meal.name === recipe.name);
   if (alreadyExists) return;
 
-  const { data: userData } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.log("User not found:", userError);
+    return;
+  }
 
   const { data, error } = await supabase
-    .from("study_sessions")
+    .from("meals")
     .insert([
       {
-        user_id: userData.user.id,
-        subject: recipe.name,
-        duration_minutes: 30,
-        notes: "עוד לא סימנתי",
+        user_id: user.id,
+        name: recipe.name,
+        feeling: "עוד לא סומן",
       },
     ])
     .select()
     .single();
 
-  if (error) {
+  if (error || !data) {
     console.log("Add suggested meal error:", error);
     return;
   }
 
   const newMeal = {
     id: data.id,
-    name: data.subject,
-    feeling: data.notes,
-    date: data.created_at,
+    name: data.name,
+    feeling: data.feeling,
+    date: data.eaten_at,
   };
 
   setMeals((prev) => [newMeal, ...prev]);
 };
-  
+
+ 
 
   const updateMealFeeling = async (indexToUpdate, newFeeling) => {
   const mealToUpdate = meals[indexToUpdate];
 
   if (mealToUpdate?.id) {
     await supabase
-      .from("study_sessions")
-      .update({ notes: newFeeling })
+      .from("meals")
+      .update({ feeling: newFeeling })
       .eq("id", mealToUpdate.id);
   }
 
@@ -2093,22 +2099,22 @@ const addSuggestedMealToToday = async (recipe) => {
 
   if (mealToDelete?.id) {
     await supabase
-      .from("study_sessions")
+      .from("meals")
       .delete()
       .eq("id", mealToDelete.id);
   }
 
-  setMeals((prev) => prev.filter((_, index) => index !== indexToDelete));
+  setMeals((prev) =>
+    prev.filter((_, index) => index !== indexToDelete)
+  );
 };
-
-  const toggleFavorite = (recipeName) => {
-    setFavorites((prev) =>
-      prev.includes(recipeName)
-        ? prev.filter((item) => item !== recipeName)
-        : [...prev, recipeName]
-    );
-  };
-
+const toggleFavorite = (recipeName) => {
+  setFavorites((prev) =>
+    prev.includes(recipeName)
+      ? prev.filter((item) => item !== recipeName)
+      : [...prev, recipeName]
+  );
+};
   const buildBotRecommendations = (answers, freeText = "") => {
     const scored = filteredRecipes.map((recipe) => {
       let score = getPreferenceScore(recipe);
